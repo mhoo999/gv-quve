@@ -760,24 +760,27 @@ body {
 .sliding-testimonials {
     overflow: hidden;
     width: 100%;
-    padding: 20px 0;
+    padding: 40px 0;
     background: rgba(255,255,255,0.1);
     margin-bottom: 30px;
 }
 
 .testimonial-subtitle {
-    font-size: 12px;
-    opacity: 0.8;
-    margin-bottom: 10px;
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 32px;
     text-align: center;
     padding: 0 24px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 .testimonial-slider {
     display: flex;
-    animation: slide 20s linear infinite;
-    gap: 30px;
+    animation: slide 30s linear infinite;
+    gap: 24px;
     padding: 0 24px;
+    will-change: transform;
 }
 
 @keyframes slide {
@@ -785,12 +788,91 @@ body {
     100% { transform: translateX(-50%); }
 }
 
-.slider-item {
+.testimonial-card {
     flex-shrink: 0;
-    padding: 10px 20px;
-    background: rgba(255,255,255,0.2);
+    width: 290px;
+    height: 478px;
+    background: #ffffff;
     border-radius: 20px;
-    white-space: nowrap;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #191f28;
+    margin-bottom: 16px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.testimonial-image {
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background: #f7f8fa;
+    flex-shrink: 0;
+}
+
+.testimonial-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonial-content {
+    font-size: 15px;
+    color: #6b7684;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    letter-spacing: -0.01em;
+}
+
+.testimonial-author {
+    font-size: 14px;
+    color: #8C00D4;
+    font-weight: 600;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+}
+
+.testimonial-button {
+    width: 100%;
+    padding: 12px 24px;
+    background: #8C00D4;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    letter-spacing: -0.01em;
+}
+
+.testimonial-button:hover {
+    background: #7A00C0;
+    transform: translateY(-1px);
+}
+
+.testimonial-button:active {
+    transform: translateY(0);
 }
 
 
@@ -1337,11 +1419,37 @@ body {
 
     .sliding-testimonials {
         margin-bottom: 30px;
+        padding: 32px 0;
     }
 
-    .testimonial-subtitle,
+    .testimonial-subtitle {
+        font-size: 13px;
+        margin-bottom: 28px;
+        padding: 0 24px;
+    }
+
     .testimonial-slider {
         padding: 0 24px;
+        gap: 20px;
+    }
+
+    .testimonial-card {
+        width: 270px;
+        height: 450px;
+        padding: 22px;
+    }
+
+    .testimonial-title {
+        font-size: 17px;
+    }
+
+    .testimonial-image {
+        height: 170px;
+    }
+
+    .testimonial-content {
+        font-size: 14px;
+        -webkit-line-clamp: 3;
     }
 
     .form-container {
@@ -1697,9 +1805,45 @@ body {
     }
 
     /* Sliding Testimonials */
-    .slider-item {
+    .sliding-testimonials {
+        padding: 32px 0;
+    }
+
+    .testimonial-subtitle {
+        font-size: 13px;
+        margin-bottom: 24px;
+    }
+
+    .testimonial-card {
+        width: 260px;
+        height: 430px;
+        padding: 20px;
+    }
+
+    .testimonial-title {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .testimonial-image {
+        height: 160px;
+        margin-bottom: 12px;
+    }
+
+    .testimonial-content {
         font-size: 14px;
-        padding: 8px 16px;
+        margin-bottom: 16px;
+        -webkit-line-clamp: 3;
+    }
+
+    .testimonial-author {
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+
+    .testimonial-button {
+        padding: 11px 20px;
+        font-size: 13px;
     }
 
     /* Research Link */
