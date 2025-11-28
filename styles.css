@@ -104,12 +104,16 @@ body {
     line-height: 1.6;
     color: #FFD74D;
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    flex-wrap: wrap;
 }
 
 .logo-inline {
     height: 1.2em;
     width: auto;
-    vertical-align: middle;
+    vertical-align: bottom;
     display: inline-block;
     margin: 0 4px;
 }
@@ -381,6 +385,10 @@ body {
     color: #191f28;
     letter-spacing: -0.01em;
     line-height: 1.5;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    flex-wrap: wrap;
 }
 
 .solution-intro p {
