@@ -1,6 +1,22 @@
 // 출시 날짜 설정 (2025년 12월 18일 00:00:00)
 const launchDate = new Date('2025-12-18T00:00:00').getTime();
 
+// 숫자를 두 자리 문자열로 포맷
+function formatTwoDigits(num) {
+    return num.toString().padStart(2, '0');
+}
+
+// 플립 카드 업데이트 함수
+function updateFlipCard(id, value) {
+    const digits = formatTwoDigits(value);
+    const elem1 = document.getElementById(id + '1');
+    const elem2 = document.getElementById(id + '2');
+    if (elem1 && elem2) {
+        elem1.textContent = digits[0];
+        elem2.textContent = digits[1];
+    }
+}
+
 // 카운트다운 업데이트 함수
 function updateCountdown() {
     const now = new Date().getTime();
@@ -12,16 +28,35 @@ function updateCountdown() {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        const countdownText = `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+        // Hero 카운트다운 업데이트
+        updateFlipCard('heroHours', hours);
+        updateFlipCard('heroMinutes', minutes);
+        updateFlipCard('heroSeconds', seconds);
 
-        document.getElementById('heroCountdown').textContent = countdownText;
-        document.getElementById('urgencyTimer').textContent = countdownText;
-        document.getElementById('ctaCountdown').textContent = countdownText;
+        // CTA 카운트다운 업데이트
+        updateFlipCard('ctaHours', hours);
+        updateFlipCard('ctaMinutes', minutes);
+        updateFlipCard('ctaSeconds', seconds);
+
+        // Urgency 타이머 (기존 텍스트 형식 유지)
+        const countdownText = `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+        const urgencyTimer = document.getElementById('urgencyTimer');
+        if (urgencyTimer) {
+            urgencyTimer.textContent = countdownText;
+        }
     } else {
         const expiredText = "출시되었습니다!";
-        document.getElementById('heroCountdown').textContent = expiredText;
-        document.getElementById('urgencyTimer').textContent = expiredText;
-        document.getElementById('ctaCountdown').textContent = expiredText;
+        const urgencyTimer = document.getElementById('urgencyTimer');
+        if (urgencyTimer) {
+            urgencyTimer.textContent = expiredText;
+        }
+        // 플립 카드들도 00으로 설정
+        updateFlipCard('heroHours', 0);
+        updateFlipCard('heroMinutes', 0);
+        updateFlipCard('heroSeconds', 0);
+        updateFlipCard('ctaHours', 0);
+        updateFlipCard('ctaMinutes', 0);
+        updateFlipCard('ctaSeconds', 0);
     }
 }
 
