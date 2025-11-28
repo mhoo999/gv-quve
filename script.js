@@ -1,3 +1,16 @@
+// ============================================
+// CONFIG: 백엔드 연동 설정
+// ============================================
+// TODO: 백엔드팀으로부터 받은 엔드포인트로 변경
+const API_CONFIG = {
+    // 예약 정보 전송 API
+    RESERVATION_ENDPOINT: '', // 예: 'https://api.quve.kr/reservations'
+    
+    // 페이지 URL
+    RESEARCH_PAGE_URL: 'https://example.com/research', // 연구 결과 자세히 보기 페이지
+    TESTIMONIAL_PAGE_URL: 'https://example.com/testimonials', // 후기 페이지
+};
+
 // 출시 날짜 설정 (2025년 12월 18일 00:00:00)
 const launchDate = new Date('2025-12-18T00:00:00').getTime();
 
@@ -150,25 +163,113 @@ document.getElementById('phone').addEventListener('input', (e) => {
     e.target.value = value;
 });
 
-// 폼 제출
-document.getElementById('reservationForm').addEventListener('submit', (e) => {
+// ============================================
+// API 호출 함수
+// ============================================
+
+/**
+ * 예약 정보를 백엔드로 전송
+ * @param {Object} reservationData - 예약 정보 객체
+ * @returns {Promise} API 응답
+ */
+async function submitReservation(reservationData) {
+    if (!API_CONFIG.RESERVATION_ENDPOINT) {
+        console.warn('API_CONFIG.RESERVATION_ENDPOINT가 설정되지 않았습니다.');
+        return Promise.reject(new Error('API 엔드포인트가 설정되지 않았습니다.'));
+    }
+
+    try {
+        const response = await fetch(API_CONFIG.RESERVATION_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(reservationData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('예약 정보 전송 실패:', error);
+        throw error;
+    }
+}
+
+/**
+ * 폼 데이터 수집
+ * @returns {Object} 폼 데이터 객체
+ */
+function collectFormData() {
+    return {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        childAge: parseInt(document.getElementById('childAge').value),
+        agree: document.getElementById('agree').checked
+    };
+}
+
+/**
+ * 폼 제출 처리
+ */
+async function handleFormSubmit(e) {
     e.preventDefault();
 
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const childAge = document.getElementById('childAge').value;
+    const formData = collectFormData();
+    
+    // 유효성 검사
+    if (!formData.name || !formData.phone || !formData.childAge || !formData.agree) {
+        alert('모든 필수 항목을 입력해주세요.');
+        return;
+    }
 
-    // 실제 구현시 서버로 데이터 전송
-    console.log('예약 정보:', { name, phone, childAge });
+    // 로딩 상태 표시 (선택사항)
+    const submitButton = e.target.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.textContent;
+    submitButton.disabled = true;
+    submitButton.textContent = '처리 중...';
 
-    // 성공 모달 표시
-    document.getElementById('successName').textContent = name;
-    document.getElementById('successModal').classList.add('show');
+    try {
+        // API_CONFIG.RESERVATION_ENDPOINT가 설정되어 있으면 백엔드로 전송
+        if (API_CONFIG.RESERVATION_ENDPOINT) {
+            const response = await submitReservation(formData);
+            console.log('예약 성공:', response);
+            
+            // 성공 모달 표시
+            document.getElementById('successName').textContent = formData.name;
+            document.getElementById('successModal').classList.add('show');
 
-    // 예약자 수 증가 (데모용)
-    const currentCount = parseInt(document.getElementById('heroReservationCount').textContent);
-    updateReservationCount(currentCount + 1);
-});
+            // 예약자 수 업데이트 (백엔드 응답에 포함된 경우)
+            if (response.totalReservations) {
+                updateReservationCount(response.totalReservations);
+            }
+        } else {
+            // API 엔드포인트가 없으면 데모 모드
+            console.log('예약 정보 (데모 모드):', formData);
+            
+            // 성공 모달 표시
+            document.getElementById('successName').textContent = formData.name;
+            document.getElementById('successModal').classList.add('show');
+
+            // 예약자 수 증가 (데모용)
+            const currentCount = parseInt(document.getElementById('heroReservationCount').textContent);
+            updateReservationCount(currentCount + 1);
+        }
+    } catch (error) {
+        console.error('예약 처리 중 오류 발생:', error);
+        alert('예약 처리 중 오류가 발생했습니다. 다시 시도해주세요.');
+    } finally {
+        // 로딩 상태 해제
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+    }
+}
+
+// 폼 제출 이벤트 리스너
+document.getElementById('reservationForm').addEventListener('submit', handleFormSubmit);
 
 // Exit Intent 감지
 let exitIntentShown = false;
@@ -222,6 +323,66 @@ function shareReferral() {
         alert('링크가 복사되었습니다!');
     }
 }
+
+// ============================================
+// 페이지 이동 함수
+// ============================================
+
+/**
+ * 연구 결과 페이지로 이동
+ */
+function goToResearchPage() {
+    if (API_CONFIG.RESEARCH_PAGE_URL) {
+        window.open(API_CONFIG.RESEARCH_PAGE_URL, '_blank');
+    } else {
+        console.warn('RESEARCH_PAGE_URL이 설정되지 않았습니다.');
+    }
+}
+
+/**
+ * 후기 페이지로 이동
+ * @param {number} testimonialId - 후기 ID (선택사항)
+ */
+function goToTestimonialPage(testimonialId = null) {
+    let url = API_CONFIG.TESTIMONIAL_PAGE_URL;
+    if (testimonialId) {
+        url += `?id=${testimonialId}`;
+    }
+    
+    if (url && url !== 'https://example.com/testimonials') {
+        window.open(url, '_blank');
+    } else {
+        console.warn('TESTIMONIAL_PAGE_URL이 설정되지 않았습니다.');
+    }
+}
+
+// ============================================
+// 버튼 이벤트 리스너 초기화
+// ============================================
+
+// DOM이 로드된 후 초기화
+document.addEventListener('DOMContentLoaded', () => {
+    // 연구 결과 자세히 보기 버튼
+    const researchLink = document.getElementById('researchLink');
+    if (researchLink) {
+        researchLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            goToResearchPage();
+        });
+    }
+
+    // 후기 자세히 보기 버튼들
+    document.querySelectorAll('.testimonial-button').forEach((button, index) => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            // 버튼이 속한 카드의 인덱스나 ID를 전달할 수 있음
+            // 예: 각 카드에 data-testimonial-id 속성을 추가하면 그 값을 사용
+            const card = button.closest('.testimonial-card');
+            const testimonialId = card ? card.getAttribute('data-testimonial-id') : index + 1;
+            goToTestimonialPage(testimonialId);
+        });
+    });
+});
 
 // 모달 외부 클릭시 닫기
 window.onclick = function(event) {
