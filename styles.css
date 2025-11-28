@@ -325,7 +325,7 @@ body {
 
 .bg-image-conversion {
     position: relative;
-    background-image: url('images/conversion-bg.jpg');
+    background-image: url('images/conversion-bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
