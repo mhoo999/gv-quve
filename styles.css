@@ -106,12 +106,13 @@ body {
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: flex-end;
+    justify-content: center;
     gap: 4px;
     flex-wrap: wrap;
 }
 
 .logo-inline {
-    height: 1.2em;
+    height: 1.8em;
     width: auto;
     vertical-align: bottom;
     display: inline-block;
@@ -387,6 +388,7 @@ body {
     line-height: 1.5;
     display: flex;
     align-items: flex-end;
+    justify-content: center;
     gap: 4px;
     flex-wrap: wrap;
 }
