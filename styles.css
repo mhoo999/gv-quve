@@ -8,7 +8,8 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
     color: #333;
-    background: #fff;
+    background: #f9fafb;
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -19,12 +20,20 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     color: white;
     text-align: center;
-    padding: 60px 20px 80px;
+    padding: 80px 20px 100px;
     position: relative;
     overflow: hidden;
+    animation: gradientShift 15s ease infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .hero::before {
@@ -36,6 +45,12 @@ body {
     bottom: 0;
     background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
     opacity: 0.3;
+    animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
 }
 
 .hero-content {
@@ -50,22 +65,45 @@ body {
     max-width: 400px;
     height: 250px;
     margin: 0 auto 30px;
-    background: rgba(0,0,0,0.3);
-    border-radius: 20px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255,255,255,0.95);
     text-align: center;
     padding: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.video-placeholder:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    border-color: rgba(255,255,255,0.3);
 }
 
 .hero h1 {
-    font-size: 32px;
+    font-size: 48px;
     font-weight: 800;
-    margin-bottom: 15px;
-    line-height: 1.3;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hero .subtitle {
@@ -82,22 +120,43 @@ body {
 
 .cta-button {
     display: inline-block;
-    background: #ff6b6b;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
     color: white;
-    padding: 18px 40px;
+    padding: 20px 48px;
     border-radius: 50px;
     text-decoration: none;
     font-size: 18px;
     font-weight: 700;
-    box-shadow: 0 8px 20px rgba(255,107,107,0.3);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: none;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.cta-button:hover::before {
+    left: 100%;
 }
 
 .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(255,107,107,0.4);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(255,107,107,0.5);
+}
+
+.cta-button:active {
+    transform: translateY(-1px) scale(1);
 }
 
 .countdown {
