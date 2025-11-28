@@ -77,12 +77,18 @@ let lastScrollTop = 0;
 window.addEventListener('scroll', () => {
     const stickyCta = document.getElementById('stickyCta');
     const ctaSection = document.getElementById('ctaSection');
+    const heroSection = document.querySelector('.hero');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Hero 섹션의 높이 계산
+    const heroSectionBottom = heroSection.offsetTop + heroSection.offsetHeight;
+    
+    // CTA 섹션 위치 계산
     const ctaSectionTop = ctaSection.offsetTop;
     const ctaSectionBottom = ctaSectionTop + ctaSection.offsetHeight;
 
-    // 스크롤 시작할 때부터 표시하되, CTA 섹션이 화면에 보일 때는 숨김
-    if (scrollTop > 0 && (scrollTop < ctaSectionTop - window.innerHeight || scrollTop > ctaSectionBottom)) {
+    // Hero 섹션을 벗어났고, CTA 섹션이 화면에 보이지 않을 때만 표시
+    if (scrollTop >= heroSectionBottom && (scrollTop < ctaSectionTop - window.innerHeight || scrollTop > ctaSectionBottom)) {
         stickyCta.classList.add('visible');
     } else {
         stickyCta.classList.remove('visible');
