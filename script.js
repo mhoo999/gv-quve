@@ -77,18 +77,22 @@ let lastScrollTop = 0;
 window.addEventListener('scroll', () => {
     const stickyCta = document.getElementById('stickyCta');
     const ctaSection = document.getElementById('ctaSection');
-    const heroSection = document.querySelector('.hero');
+    const bgGraySection = document.querySelector('.bg-gray.bg-image');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Hero 섹션의 높이 계산
-    const heroSectionBottom = heroSection.offsetTop + heroSection.offsetHeight;
+    // bg-gray bg-image 섹션 위치 계산
+    const bgGraySectionTop = bgGraySection.offsetTop;
     
     // CTA 섹션 위치 계산
     const ctaSectionTop = ctaSection.offsetTop;
     const ctaSectionBottom = ctaSectionTop + ctaSection.offsetHeight;
 
-    // Hero 섹션을 벗어났고, CTA 섹션이 화면에 보이지 않을 때만 표시
-    if (scrollTop >= heroSectionBottom && (scrollTop < ctaSectionTop - window.innerHeight || scrollTop > ctaSectionBottom)) {
+    // bg-gray bg-image 섹션이 화면에 보이기 시작할 때부터 표시
+    // (섹션의 상단이 화면 하단에 도달했을 때)
+    const isBgGrayVisible = scrollTop + window.innerHeight >= bgGraySectionTop;
+    
+    // bg-gray 섹션이 보이고, CTA 섹션이 화면에 보이지 않을 때만 표시
+    if (isBgGrayVisible && (scrollTop < ctaSectionTop - window.innerHeight || scrollTop > ctaSectionBottom)) {
         stickyCta.classList.add('visible');
     } else {
         stickyCta.classList.remove('visible');
