@@ -575,22 +575,25 @@ body {
 
 .sliding-testimonials {
     overflow: hidden;
-    margin: 0 -24px 30px -24px;
-    padding: 20px 24px;
+    width: 100%;
+    padding: 20px 0;
     background: rgba(255,255,255,0.1);
-    width: calc(100% + 48px);
+    margin-bottom: 30px;
 }
 
 .testimonial-subtitle {
     font-size: 12px;
     opacity: 0.8;
     margin-bottom: 10px;
+    text-align: center;
+    padding: 0 24px;
 }
 
 .testimonial-slider {
     display: flex;
     animation: slide 20s linear infinite;
     gap: 30px;
+    padding: 0 24px;
 }
 
 @keyframes slide {
@@ -1070,8 +1073,12 @@ body {
     }
 
     .sliding-testimonials {
-        margin: 0 -24px 30px -24px;
-        width: calc(100% + 48px);
+        margin-bottom: 30px;
+    }
+
+    .testimonial-subtitle,
+    .testimonial-slider {
+        padding: 0 24px;
     }
 
     .form-container {
@@ -1283,8 +1290,12 @@ body {
     }
 
     .sliding-testimonials {
-        margin: 0 -20px 30px -20px;
-        width: calc(100% + 40px);
+        margin-bottom: 30px;
+    }
+
+    .testimonial-subtitle,
+    .testimonial-slider {
+        padding: 0 20px;
     }
 
     .cta-stats {
