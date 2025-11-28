@@ -1050,6 +1050,18 @@ body {
     font-size: 14px;
 }
 
+.footer-service-link {
+    color: rgba(255,255,255,0.8);
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-service-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
 .footer-contact {
     margin-bottom: 20px;
     font-size: 14px;

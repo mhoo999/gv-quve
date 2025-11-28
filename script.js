@@ -12,6 +12,26 @@ const API_CONFIG = {
 };
 
 // ============================================
+// LINK CONFIG: 링크 버튼 URL 설정
+// ============================================
+// TODO: 나중에 실제 URL로 변경
+const LINK_CONFIG = {
+    // 대체 액션 링크
+    CONSULTATION_URL: '', // 💬 1:1 상담하기 URL
+    NOTIFICATION_URL: '', // 🔔 출시 알림만 받기 URL
+    
+    // 서비스 링크
+    SUPERVIE_URL: '', // 슈퍼브이 URL
+    SUPERREADING_URL: '', // 슈퍼리딩 URL
+    QUVE_URL: '', // 큐브 URL
+    
+    // 소셜 미디어 링크
+    INSTAGRAM_URL: '', // 인스타그램 URL
+    YOUTUBE_URL: '', // 유튜브 URL
+    BLOG_URL: '', // 블로그 URL
+};
+
+// ============================================
 // TESTIMONIAL DATA: 후기 데이터
 // ============================================
 // TODO: 나중에 후기를 추가할 때 이 배열에 객체만 추가하면 됩니다
@@ -505,6 +525,119 @@ function initTestimonialSlider() {
 // 버튼 이벤트 리스너 초기화
 // ============================================
 
+// ============================================
+// 링크 초기화 함수
+// ============================================
+
+/**
+ * 링크 버튼들 초기화
+ */
+function initLinks() {
+    // 1:1 상담하기
+    const consultationLink = document.getElementById('consultationLink');
+    if (consultationLink) {
+        consultationLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (LINK_CONFIG.CONSULTATION_URL) {
+                window.open(LINK_CONFIG.CONSULTATION_URL, '_blank');
+            } else {
+                console.warn('CONSULTATION_URL이 설정되지 않았습니다.');
+            }
+        });
+    }
+
+    // 출시 알림만 받기
+    const notificationLink = document.getElementById('notificationLink');
+    if (notificationLink) {
+        notificationLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (LINK_CONFIG.NOTIFICATION_URL) {
+                window.open(LINK_CONFIG.NOTIFICATION_URL, '_blank');
+            } else {
+                console.warn('NOTIFICATION_URL이 설정되지 않았습니다.');
+            }
+        });
+    }
+
+    // 슈퍼브이
+    const supervieLink = document.getElementById('supervieLink');
+    if (supervieLink) {
+        supervieLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (LINK_CONFIG.SUPERVIE_URL) {
+                window.open(LINK_CONFIG.SUPERVIE_URL, '_blank');
+            } else {
+                console.warn('SUPERVIE_URL이 설정되지 않았습니다.');
+            }
+        });
+    }
+
+    // 슈퍼리딩
+    const superreadingLink = document.getElementById('superreadingLink');
+    if (superreadingLink) {
+        superreadingLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (LINK_CONFIG.SUPERREADING_URL) {
+                window.open(LINK_CONFIG.SUPERREADING_URL, '_blank');
+            } else {
+                console.warn('SUPERREADING_URL이 설정되지 않았습니다.');
+            }
+        });
+    }
+
+    // 큐브
+    const quveLink = document.getElementById('quveLink');
+    if (quveLink) {
+        quveLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (LINK_CONFIG.QUVE_URL) {
+                window.open(LINK_CONFIG.QUVE_URL, '_blank');
+            } else {
+                console.warn('QUVE_URL이 설정되지 않았습니다.');
+            }
+        });
+    }
+
+    // 인스타그램
+    const instagramLink = document.getElementById('instagramLink');
+    if (instagramLink) {
+        instagramLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (LINK_CONFIG.INSTAGRAM_URL) {
+                window.open(LINK_CONFIG.INSTAGRAM_URL, '_blank');
+            } else {
+                console.warn('INSTAGRAM_URL이 설정되지 않았습니다.');
+            }
+        });
+    }
+
+    // 유튜브
+    const youtubeLink = document.getElementById('youtubeLink');
+    if (youtubeLink) {
+        youtubeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (LINK_CONFIG.YOUTUBE_URL) {
+                window.open(LINK_CONFIG.YOUTUBE_URL, '_blank');
+            } else {
+                console.warn('YOUTUBE_URL이 설정되지 않았습니다.');
+            }
+        });
+    }
+
+    // 블로그
+    const blogLink = document.getElementById('blogLink');
+    if (blogLink) {
+        blogLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (LINK_CONFIG.BLOG_URL) {
+                window.open(LINK_CONFIG.BLOG_URL, '_blank');
+            } else {
+                console.warn('BLOG_URL이 설정되지 않았습니다.');
+            }
+        });
+    }
+}
+
 // DOM이 로드된 후 초기화
 document.addEventListener('DOMContentLoaded', () => {
     // 연구 결과 자세히 보기 버튼
@@ -518,6 +651,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 후기 슬라이더 초기화
     initTestimonialSlider();
+    
+    // 링크 초기화
+    initLinks();
 });
 
 // 모달 외부 클릭시 닫기

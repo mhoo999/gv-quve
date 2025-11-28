@@ -339,8 +339,8 @@
             <div class="alternative-actions">
                 <p>아직 고민되시나요?</p>
                 <div class="alternative-buttons">
-                    <a href="#" class="alt-button" onclick="alert('1:1 상담 페이지로 이동합니다'); return false;">💬 1:1 상담하기</a>
-                    <a href="#" class="alt-button" onclick="alert('출시 알림 신청이 완료되었습니다'); return false;">🔔 출시 알림만 받기</a>
+                    <a href="#" class="alt-button" id="consultationLink">💬 1:1 상담하기</a>
+                    <a href="#" class="alt-button" id="notificationLink">🔔 출시 알림만 받기</a>
                 </div>
             </div>
         </div>
@@ -351,11 +351,11 @@
         <div class="footer-content">
             <div class="footer-logo"><img src="images/quve_logo.png" alt="QUVE" /></div>
             <div class="footer-services">
-                <span>슈퍼브이</span>
+                <a href="#" id="supervieLink" class="footer-service-link">슈퍼브이</a>
                 <span>|</span>
-                <span>슈퍼리딩</span>
+                <a href="#" id="superreadingLink" class="footer-service-link">슈퍼리딩</a>
                 <span>|</span>
-                <span>큐브</span>
+                <a href="#" id="quveLink" class="footer-service-link">큐브</a>
             </div>
             <div class="footer-contact">
                 📧 문의: help@grovie.com<br>
@@ -363,9 +363,9 @@
                 ⏰ 운영시간: 평일 9시-6시
             </div>
             <div class="footer-social">
-                <a href="#" title="인스타그램">📷</a>
-                <a href="#" title="유튜브">▶️</a>
-                <a href="#" title="블로그">📝</a>
+                <a href="#" title="인스타그램" id="instagramLink">📷</a>
+                <a href="#" title="유튜브" id="youtubeLink">▶️</a>
+                <a href="#" title="블로그" id="blogLink">📝</a>
             </div>
             <div class="footer-copyright">
                 © 2025 그로비교육. All rights reserved.<br>
