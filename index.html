@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>큐브(QUVE) 사전예약 - 세계 최초 질문하는 책</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            margin: 0 auto 30px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .hero .subtitle {
+            font-size: 18px;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+
+        .hero .launch-date {
+            font-size: 16px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(255,107,107,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(255,107,107,0.4);
+        }
+
+        .countdown {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .countdown-timer {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 10px 0;
+            letter-spacing: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .social-proof {
+            margin-top: 25px;
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        .bg-gray {
+            background: #f8f9fa;
+        }
+
+        /* Problem Section */
+        .problem-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #2c3e50;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Solution Section */
+        .solution-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+
+        .solution-intro p.main-text {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .solution-intro p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .experiment-section {
+            max-width: 900px;
+            margin: 40px auto 0;
+        }
+
+        .experiment-title {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .experiment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .experiment-item {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .experiment-item.negative {
+            border: 2px solid #ffcccc;
+            background: #fff5f5;
+        }
+
+        .experiment-item.positive {
+            border: 2px solid #c3e6cb;
+            background: #f0fff4;
+        }
+
+        .experiment-item.quve {
+            border: 3px solid #667eea;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8ebff 100%);
+        }
+
+        .experiment-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .experiment-item h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .experiment-item p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .research-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .research-link a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 12px 24px;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .research-link a:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Conversion Section */
+        .conversion-box {
+            max-width: 700px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe3e3 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border: 3px solid #ff6b6b;
+            box-shadow: 0 10px 40px rgba(255,107,107,0.2);
+        }
+
+        .conversion-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .benefits-comparison {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .benefit-section {
+            margin-bottom: 30px;
+        }
+
+        .benefit-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .benefit-section-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            padding-bottom: 8px;
+        }
+
+        .benefit-section.basic .benefit-section-title {
+            color: #666;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .benefit-section.special .benefit-section-title {
+            color: #ff6b6b;
+            border-bottom: 2px solid #ff6b6b;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .benefit-item:last-child {
+            border-bottom: none;
+        }
+
+        .benefit-check {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .benefit-text {
+            flex: 1;
+        }
+
+        .benefit-text strong {
+            font-size: 16px;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .benefit-text small {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .total-value {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: #ff6b6b;
+            margin: 25px 0;
+        }
+
+        .urgency {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .urgency-timer {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ff6b6b;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .conversion-cta {
+            width: 100%;
+            padding: 20px;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .safety-notes {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* FAQ Section */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 20px 20px 20px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s;
+            font-size: 12px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .sliding-testimonials {
+            overflow: hidden;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .testimonial-subtitle {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            animation: slide 20s linear infinite;
+            gap: 30px;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .slider-item {
+            flex-shrink: 0;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .cta-stats {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .cta-countdown {
+            margin-bottom: 40px;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .checkbox-group label {
+            font-size: 13px;
+            color: #2c3e50;
+            line-height: 1.5;
+        }
+
+        .alternative-actions {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .alternative-actions p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .alternative-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .alt-button {
+            padding: 12px 25px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            transition: background 0.3s;
+            border: 2px solid rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+
+        .alt-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 20px 20px;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-services {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-services span {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+
+        .footer-contact {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.8;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-social a {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .modal-content p {
+            font-size: 16px;
+            margin-bottom: 25px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .modal-button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-button.primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .modal-button.primary:hover {
+            background: #5568d3;
+        }
+
+        .modal-button.secondary {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .modal-button.secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .modal-button.share {
+            background: #4CAF50;
+            color: white;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .modal-button.share:hover {
+            background: #45a049;
+        }
+
+        /* Sticky CTA */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+            z-index: 999;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sticky-cta.visible {
+            transform: translateY(0);
+        }
+
+        .sticky-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .sticky-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .sticky-info strong {
+            font-size: 18px;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .sticky-info p {
+            font-size: 13px;
+            color: #666;
+            margin: 0;
+        }
+
+        .sticky-cta-button {
+            padding: 15px 30px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .experiment-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+            }
+
+            .sticky-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+
+            .sticky-cta-button {
+                width: 100%;
+            }
+
+            .sticky-info strong {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="video-placeholder">
+                🎬 아이가 큐브와 대화하는<br>실제 영상 (3초 클립)
+            </div>
+            <h1>유튜브 보는 시간,<br>생각하는 시간으로</h1>
+            <p class="subtitle">세계 최초 질문하는 책 QUVE</p>
+            <p class="launch-date">2025년 12월 18일 00시 출시</p>
+            <a href="#signup" class="cta-button">사전예약 하고 특별 혜택 받기 ▼</a>
+            <div class="countdown">
+                <p>⏰ 얼리버드 마감까지</p>
+                <div class="countdown-timer" id="heroCountdown"></div>
+            </div>
+            <div class="social-proof">
+                👥 이미 <strong><span id="heroReservationCount">00</span>명</strong>이 예약했어요
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section bg-gray">
+        <div class="container">
+            <h2 class="section-title">우리 아이 영상 시청, 괜찮을까요?</h2>
+            <div class="problem-cards">
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>WHO 권장 스크린타임</h3>
+                    <p>만 2세 미만: 영상 시청 금지<br>2-4세: 하루 1시간 이내<br><br>하지만 현실은 평균 2-3시간...</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">😔</div>
+                    <h3>"미안하지만 영상 좀 봐줘..."</h3>
+                    <p>죄책감 느끼면서도 어쩔 수 없이 보여주게 되는 영상들. 바쁜 일상 속 엄마의 현실입니다.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤐</div>
+                    <h3>"우리 아이 말이 늦은 것 같아요"</h3>
+                    <p>또래보다 어휘력과 표현력이 부족해 걱정되는 우리 아이. 혹시 영상 때문은 아닐까요?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">✨ 우리 아이가 생각할 수 있는 영상을 보여주세요</h2>
+            <div class="solution-intro">
+                <p class="main-text">우리 아이의 이름을 불러주는 특별한 동화책</p>
+                <p>엄마와 함께 책을 읽는 것처럼<br>우리 아이의 사고력과 언어 잠재력을 키워줍니다.</p>
+            </div>
+
+            <div class="experiment-section">
+                <h3 class="experiment-title">뇌 활성화 비교 실험 결과</h3>
+                <div class="experiment-grid">
+                    <div class="experiment-item negative">
+                        <div class="experiment-icon">📺</div>
+                        <h3>일반 동영상 시청</h3>
+                        <p>뇌가 생각할 기회 없이 정보를 수동적으로 받음. 뇌에 자극이 거의 없음.</p>
+                    </div>
+
+                    <div class="experiment-item positive">
+                        <div class="experiment-icon">📚</div>
+                        <h3>엄마와 함께 책 읽기</h3>
+                        <p>뇌가 활발히 자극받음. 사고력과 언어를 자극하는 가장 이상적인 상황.</p>
+                    </div>
+
+                    <div class="experiment-item quve">
+                        <div class="experiment-icon">✨</div>
+                        <h3>큐브 시청</h3>
+                        <p>엄마와 함께 책 읽을 때와 유사하게 뇌가 활성화됨. 생각하는 힘을 키워줌.</p>
+                    </div>
+                </div>
+
+                <div class="research-link">
+                    <a href="https://example.com/research" target="_blank" id="researchLink">
+                        📄 연구 결과 자세히 보기 →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conversion Section -->
+    <section class="section bg-gray" id="signup">
+        <div class="container">
+            <div class="conversion-box">
+                <h2 class="conversion-title">🎁 사전예약 특별 혜택</h2>
+
+                <div class="benefits-comparison">
+                    <div class="benefit-section basic">
+                        <div class="benefit-section-title">기본 혜택</div>
+                        <div class="benefit-item">
+                            <div class="benefit-check">✓</div>
+                            <div class="benefit-text">
+                                <strong>1주일 무료 체험</strong>
+                                <small>이후 월 39,000원</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="benefit-section special">
+                        <div class="benefit-section-title">🔥 사전예약 시 추가 혜택</div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-check">✅</div>
+                            <div class="benefit-text">
+                                <strong>1주일 무료 체험 추가 제공</strong>
+                                <small>총 2주일 무료 체험 (1주 → 2주)</small>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-check">✅</div>
+                            <div class="benefit-text">
+                                <strong>첫 3개월 50% 할인</strong>
+                                <small>월 39,000원 → 19,500원 (58,500원 절약)</small>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-check">✅</div>
+                            <div class="benefit-text">
+                                <strong>영어 그림책 선물</strong>
+                                <small>선착순 200명 - 34만원 상당 영어 그림책</small>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-check">✅</div>
+                            <div class="benefit-text">
+                                <strong>칼데콧 수상 그림책 선물</strong>
+                                <small>선착순 1,000명 - 칼데콧 수상 그림책</small>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-check">✅</div>
+                            <div class="benefit-text">
+                                <strong>전용 태블릿 추첨</strong>
+                                <small>추첨 10명 - 60만원 상당 전용 태블릿</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="total-value">
+                    = 최대 100만원 상당 혜택
+                </div>
+
+                <div class="urgency">
+                    <p>⏰ 사전예약 혜택 마감까지</p>
+                    <div class="urgency-timer" id="urgencyTimer"></div>
+                </div>
+
+                <button class="cta-button conversion-cta" onclick="scrollToForm()">100만원 상당 혜택 확보하기</button>
+
+                <div class="safety-notes">
+                    💳 지금은 결제하지 않습니다<br>
+                    혜택만 먼저 확보하세요<br>
+                    🔒 개인정보 안전하게 보호됩니다
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">❓ 자주 묻는 질문</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>아이가 부끄러움이 많아서 대답을 잘 못 할 것 같은데 괜찮나요?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        괜찮아요! 실제로 소리 내어 대답하지 않아도 아이의 이름이 불리고, 질문을 듣는 순간 아이의 뇌는 답변에 대해 생각하게 됩니다. 이 과정만으로도 뇌가 활발하게 자극받아 언어 발달과 사고력 향상에 도움이 됩니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>태블릿이 꼭 필요한가요?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        아이패드, 갤럭시탭 등 태블릿 또는 스마트폰에서 모두 사용 가능합니다. iOS와 Android 모두 지원합니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>와이파이가 없어도 되나요?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        콘텐츠를 다운로드한 후 오프라인에서 재생이 가능합니다. 외출 시에도 걱정 없이 사용하실 수 있어요.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>무료 체험 후 자동 결제되나요?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        ❌ 아니요. 체험 종료 전에 안내 메시지를 보내드리며, 고객님의 동의 후에만 결제가 진행됩니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>환불이 가능한가요?</span>
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        ✅ 7일 이내 100% 환불이 가능합니다. 고객님의 만족이 최우선입니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta" id="ctaSection">
+        <div class="container">
+            <div class="sliding-testimonials">
+                <p class="testimonial-subtitle">실제 베타 테스터 후기</p>
+                <div class="testimonial-slider">
+                    <div class="slider-item">"기대돼요!"</div>
+                    <div class="slider-item">"우리 아이도!"</div>
+                    <div class="slider-item">"벌써 시작하고 싶어요"</div>
+                    <div class="slider-item">"엄마가 더 기대되네요"</div>
+                    <div class="slider-item">"빨리 써보고 싶어요"</div>
+                    <div class="slider-item">"기대돼요!"</div>
+                    <div class="slider-item">"우리 아이도!"</div>
+                    <div class="slider-item">"벌써 시작하고 싶어요"</div>
+                </div>
+            </div>
+
+            <div class="cta-stats">
+                👥 지금까지 <strong><span id="ctaReservationCount">00</span>명</strong>이 선택했습니다
+            </div>
+
+            <div class="cta-countdown">
+                <p>⏰ 얼리버드 마감까지</p>
+                <div class="countdown-timer" id="ctaCountdown"></div>
+            </div>
+
+            <div class="form-container">
+                <form id="reservationForm">
+                    <div class="form-group">
+                        <label for="name">이름</label>
+                        <input type="text" id="name" name="name" placeholder="홍길동" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">전화번호</label>
+                        <input type="tel" id="phone" name="phone" placeholder="010-1234-5678" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="childAge">자녀 연령</label>
+                        <select id="childAge" name="childAge" required>
+                            <option value="">선택해주세요</option>
+                        </select>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="agree" name="agree" required>
+                        <label for="agree">개인정보 수집 및 마케팅 정보 수신에 동의합니다 (필수)</label>
+                    </div>
+
+                    <button type="submit" class="cta-button conversion-cta">100만원 상당 혜택 확보하기</button>
+
+                    <div class="safety-notes">
+                        💳 지금은 결제하지 않습니다<br>
+                        혜택만 먼저 확보하세요<br>
+                        🔒 개인정보 안전하게 보호됩니다
+                    </div>
+                </form>
+            </div>
+
+            <div class="alternative-actions">
+                <p>아직 고민되시나요?</p>
+                <div class="alternative-buttons">
+                    <a href="#" class="alt-button" onclick="alert('1:1 상담 페이지로 이동합니다'); return false;">💬 1:1 상담하기</a>
+                    <a href="#" class="alt-button" onclick="alert('출시 알림 신청이 완료되었습니다'); return false;">🔔 출시 알림만 받기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">QUVE</div>
+            <div class="footer-services">
+                <span>슈퍼브이</span>
+                <span>|</span>
+                <span>슈퍼리딩</span>
+                <span>|</span>
+                <span>큐브</span>
+            </div>
+            <div class="footer-contact">
+                📧 문의: help@grovie.com<br>
+                📞 고객센터: 1588-0000<br>
+                ⏰ 운영시간: 평일 9시-6시
+            </div>
+            <div class="footer-social">
+                <a href="#" title="인스타그램">📷</a>
+                <a href="#" title="유튜브">▶️</a>
+                <a href="#" title="블로그">📝</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 그로비교육. All rights reserved.<br>
+                사업자등록번호: 000-00-00000 | 대표: 홍길동
+            </div>
+        </div>
+    </footer>
+
+    <!-- Exit Intent Modal -->
+    <div id="exitModal" class="modal">
+        <div class="modal-content">
+            <h3>잠시만요! 🚨</h3>
+            <p>지금 나가시면<br>사전 예약 혜택을 놓칠 수 있습니다.</p>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="closeExitModal(); scrollToForm();">사전 예약 혜택 받기</button>
+                <button class="modal-button secondary" onclick="confirmExit()">그냥 나가기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <h3>✅ 사전 예약 완료!</h3>
+            <p><strong><span id="successName"></span></strong>님,<br>사전 예약이 완료되었습니다.<br>카카오톡 메시지를 확인해주세요!</p>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="closeSuccessModal()">확인</button>
+                <button class="modal-button share" onclick="shareReferral()">👥 친구에게 공유하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky CTA -->
+    <div id="stickyCta" class="sticky-cta">
+        <div class="sticky-content">
+            <div class="sticky-info">
+                <strong>🎁 100만원 상당 혜택</strong>
+                <p>지금까지 <span id="stickyReservationCount">00</span>명이 예약했어요</p>
+            </div>
+            <a href="#ctaSection" class="cta-button sticky-cta-button" onclick="scrollToForm(); return false;">지금 예약하기</a>
+        </div>
+    </div>
+
+    <script>
+        // 출시 날짜 설정 (2025년 12월 18일 00:00:00)
+        const launchDate = new Date('2025-12-18T00:00:00').getTime();
+
+        // 카운트다운 업데이트 함수
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                const countdownText = `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+
+                document.getElementById('heroCountdown').textContent = countdownText;
+                document.getElementById('urgencyTimer').textContent = countdownText;
+                document.getElementById('ctaCountdown').textContent = countdownText;
+            } else {
+                const expiredText = "출시되었습니다!";
+                document.getElementById('heroCountdown').textContent = expiredText;
+                document.getElementById('urgencyTimer').textContent = expiredText;
+                document.getElementById('ctaCountdown').textContent = expiredText;
+            }
+        }
+
+        // 초기 실행 및 1초마다 업데이트
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // 예약자 수 업데이트 함수 (실제 구현시 서버에서 가져오기)
+        function updateReservationCount(count) {
+            const countStr = count.toString().padStart(2, '0');
+            document.getElementById('heroReservationCount').textContent = countStr;
+            document.getElementById('ctaReservationCount').textContent = countStr;
+            document.getElementById('stickyReservationCount').textContent = countStr;
+        }
+
+        // Sticky CTA 표시/숨김
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const stickyCta = document.getElementById('stickyCta');
+            const ctaSection = document.getElementById('ctaSection');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const ctaSectionTop = ctaSection.offsetTop;
+            const ctaSectionBottom = ctaSectionTop + ctaSection.offsetHeight;
+
+            // 800px 이상 스크롤하고, CTA 섹션이 화면에 보이지 않을 때만 표시
+            if (scrollTop > 800 && (scrollTop < ctaSectionTop - window.innerHeight || scrollTop > ctaSectionBottom)) {
+                stickyCta.classList.add('visible');
+            } else {
+                stickyCta.classList.remove('visible');
+            }
+        });
+
+        // 자녀 연령 옵션 생성 (24개월~72개월)
+        const childAgeSelect = document.getElementById('childAge');
+        for (let i = 24; i <= 72; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `${i}개월`;
+            childAgeSelect.appendChild(option);
+        }
+
+        // FAQ 토글
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const wasActive = item.classList.contains('active');
+
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // 폼으로 스크롤
+        function scrollToForm() {
+            document.getElementById('ctaSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 전화번호 자동 포맷
+        document.getElementById('phone').addEventListener('input', (e) => {
+            let value = e.target.value.replace(/[^0-9]/g, '');
+            if (value.length > 3 && value.length <= 7) {
+                value = value.slice(0, 3) + '-' + value.slice(3);
+            } else if (value.length > 7) {
+                value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
+            }
+            e.target.value = value;
+        });
+
+        // 폼 제출
+        document.getElementById('reservationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const childAge = document.getElementById('childAge').value;
+
+            // 실제 구현시 서버로 데이터 전송
+            console.log('예약 정보:', { name, phone, childAge });
+
+            // 성공 모달 표시
+            document.getElementById('successName').textContent = name;
+            document.getElementById('successModal').classList.add('show');
+
+            // 예약자 수 증가 (데모용)
+            const currentCount = parseInt(document.getElementById('heroReservationCount').textContent);
+            updateReservationCount(currentCount + 1);
+        });
+
+        // Exit Intent 감지
+        let exitIntentShown = false;
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY < 0 && !exitIntentShown) {
+                exitIntentShown = true;
+                document.getElementById('exitModal').classList.add('show');
+            }
+        });
+
+        // Exit 모달 닫기
+        function closeExitModal() {
+            document.getElementById('exitModal').classList.remove('show');
+        }
+
+        // 페이지 나가기 확인
+        function confirmExit() {
+            window.close();
+        }
+
+        // 성공 모달 닫기
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('show');
+        }
+
+        // 리퍼럴 공유
+        function shareReferral() {
+            const name = document.getElementById('successName').textContent;
+            // 실제 구현시 개인별 리퍼럴 링크 생성
+            const referralUrl = `https://quve.kr/ref/${name}`;
+            const shareText = `${name}님이 큐브를 추천합니다! 100만원 상당 혜택을 받아보세요.`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: '큐브 사전예약',
+                    text: shareText,
+                    url: referralUrl
+                }).then(() => {
+                    alert('공유가 완료되었습니다!');
+                }).catch((error) => {
+                    console.log('공유 취소 또는 실패:', error);
+                });
+            } else {
+                // Web Share API를 지원하지 않는 경우
+                const textarea = document.createElement('textarea');
+                textarea.value = `${shareText}\n${referralUrl}`;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('링크가 복사되었습니다!');
+            }
+        }
+
+        // 모달 외부 클릭시 닫기
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('show');
+            }
+        }
+    </script>
+</body>
+</html>
