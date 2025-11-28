@@ -9,26 +9,31 @@
 <body>
     <!-- Hero Section -->
     <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="videos/hero-video.mp4" type="video/mp4">
+        </video>
         <div class="hero-content">
             <div class="video-placeholder">
                 🎬 아이가 큐브와 대화하는<br>실제 영상 (3초 클립)
             </div>
             <h1>일방적인 영상 시청 시간,<br>생각하는 시간으로</h1>
             <p class="subtitle">세계 최초, 질문하는 동화책 QUVE</p>
-            <p class="launch-date">2025년 12월 18일 정식 오픈</p>
-            <a href="#signup" class="cta-button">사전 예약하고 특별 혜택 받기</a>
-            <div class="countdown">
-                <p>⏰ 얼리버드 마감까지</p>
-                <div class="countdown-timer" id="heroCountdown"></div>
-            </div>
-            <div class="social-proof">
-                👥 이미 <strong><span id="heroReservationCount">00</span>명</strong>이 예약했어요
+            <p class="launch-date">🎆 2025년 12월 18일 정식 오픈 🎆</p>
+            <a href="#ctaSection" class="cta-button" onclick="smoothScrollToCta(event)">사전 예약하고 특별 혜택 받기</a>
+            <div class="hero-stats">
+                <div class="countdown">
+                    <p>⏰ 얼리버드 마감까지</p>
+                    <div class="countdown-timer" id="heroCountdown"></div>
+                </div>
+                <div class="social-proof">
+                    👥 이미 <strong><span id="heroReservationCount">00</span>명</strong>이 예약했어요
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Problem Section -->
-    <section class="section bg-gray">
+    <section class="section bg-gray bg-image">
         <div class="container">
             <h2 class="section-title">우리 아이 영상 시청, 괜찮을까요?</h2>
             <div class="problem-cards">
@@ -64,19 +69,25 @@
                 <h3 class="experiment-title">뇌 활성화 비교 실험 결과</h3>
                 <div class="experiment-grid">
                     <div class="experiment-item negative">
-                        <div class="experiment-icon">📺</div>
+                        <div class="experiment-image">
+                            <img src="images/image1.png" alt="일반 동영상 시청 시 뇌 활성화" />
+                        </div>
                         <h3>일반 동영상 시청</h3>
                         <p>뇌가 생각할 기회 없이 정보를 수동적으로 받음. 뇌에 자극이 거의 없음.</p>
                     </div>
 
                     <div class="experiment-item positive">
-                        <div class="experiment-icon">📚</div>
+                        <div class="experiment-image">
+                            <img src="images/image2.png" alt="엄마와 함께 책 읽기 시 뇌 활성화" />
+                        </div>
                         <h3>엄마와 함께 책 읽기</h3>
                         <p>뇌가 활발히 자극받음. 사고력과 언어를 자극하는 가장 이상적인 상황.</p>
                     </div>
 
                     <div class="experiment-item quve">
-                        <div class="experiment-icon">✨</div>
+                        <div class="experiment-image">
+                            <img src="images/image3.png" alt="큐브 시청 시 뇌 활성화" />
+                        </div>
                         <h3>큐브 시청</h3>
                         <p>엄마와 함께 책 읽을 때와 유사하게 뇌가 활성화됨. 생각하는 힘을 키워줌.</p>
                     </div>
@@ -239,13 +250,14 @@
         </div>
 
         <div class="container">
-            <div class="cta-stats">
-                👥 지금까지 <strong><span id="ctaReservationCount">00</span>명</strong>이 선택했습니다
-            </div>
-
-            <div class="cta-countdown">
-                <p>⏰ 얼리버드 마감까지</p>
-                <div class="countdown-timer" id="ctaCountdown"></div>
+            <div class="hero-stats">
+                <div class="countdown">
+                    <p>⏰ 얼리버드 마감까지</p>
+                    <div class="countdown-timer" id="ctaCountdown"></div>
+                </div>
+                <div class="social-proof">
+                    👥 이미 <strong><span id="ctaReservationCount">00</span>명</strong>이 예약했어요
+                </div>
             </div>
 
             <div class="form-container">
@@ -323,8 +335,12 @@
     <!-- Exit Intent Modal -->
     <div id="exitModal" class="modal">
         <div class="modal-content">
+            <button class="modal-close" onclick="closeExitModal()">×</button>
             <h3>잠시만요! 🚨</h3>
-            <p>지금 나가시면<br>사전 예약 혜택을 놓칠 수 있습니다.</p>
+            <div class="modal-image">
+                <img src="images/modal-exit-image.jpg" alt="사전 예약 혜택" />
+            </div>
+            <p class="modal-warning">지금 나가시면<br><strong>사전 예약 혜택을 놓칠 수 있습니다.</strong></p>
             <div class="modal-buttons">
                 <button class="modal-button primary" onclick="closeExitModal(); scrollToForm();">사전 예약 혜택 받기</button>
                 <button class="modal-button secondary" onclick="confirmExit()">그냥 나가기</button>
@@ -335,6 +351,7 @@
     <!-- Success Modal -->
     <div id="successModal" class="modal">
         <div class="modal-content">
+            <button class="modal-close" onclick="closeSuccessModal()">×</button>
             <h3>✅ 사전 예약 완료!</h3>
             <p><strong><span id="successName"></span></strong>님,<br>사전 예약이 완료되었습니다.<br>카카오톡 메시지를 확인해주세요!</p>
             <div class="modal-buttons">

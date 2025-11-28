@@ -46,8 +46,8 @@ window.addEventListener('scroll', () => {
     const ctaSectionTop = ctaSection.offsetTop;
     const ctaSectionBottom = ctaSectionTop + ctaSection.offsetHeight;
 
-    // 800px 이상 스크롤하고, CTA 섹션이 화면에 보이지 않을 때만 표시
-    if (scrollTop > 800 && (scrollTop < ctaSectionTop - window.innerHeight || scrollTop > ctaSectionBottom)) {
+    // 스크롤 시작할 때부터 표시하되, CTA 섹션이 화면에 보일 때는 숨김
+    if (scrollTop > 0 && (scrollTop < ctaSectionTop - window.innerHeight || scrollTop > ctaSectionBottom)) {
         stickyCta.classList.add('visible');
     } else {
         stickyCta.classList.remove('visible');
@@ -80,6 +80,18 @@ document.querySelectorAll('.faq-question').forEach(question => {
 // 폼으로 스크롤
 function scrollToForm() {
     document.getElementById('ctaSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ctaSection으로 부드럽게 스크롤
+function smoothScrollToCta(event) {
+    event.preventDefault();
+    const ctaSection = document.getElementById('ctaSection');
+    if (ctaSection) {
+        ctaSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
 }
 
 // 전화번호 자동 포맷
@@ -129,7 +141,7 @@ function closeExitModal() {
 
 // 페이지 나가기 확인
 function confirmExit() {
-    window.close();
+    closeExitModal();
 }
 
 // 성공 모달 닫기
