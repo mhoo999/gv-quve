@@ -11,6 +11,71 @@ const API_CONFIG = {
     TESTIMONIAL_PAGE_URL: 'https://example.com/testimonials', // 후기 페이지
 };
 
+// ============================================
+// TESTIMONIAL DATA: 후기 데이터
+// ============================================
+// TODO: 나중에 후기를 추가할 때 이 배열에 객체만 추가하면 됩니다
+const TESTIMONIAL_DATA = [
+    {
+        id: 1,
+        title: "유튜브만 찾던 아이가 먼저 '큐브 하자'고 졸라요!",
+        image: "images/testimonial-1.png",
+        content: "일방적인 영상만 보던 아이가, 캐릭터가 자기 말에 대답해주고 칭찬해주니 신나서 30분 내내 조잘거리네요.",
+        author: "- 5세 자녀",
+        pageUrl: null // null이면 기본 후기 페이지로 이동, 특정 URL이면 해당 페이지로 이동
+    },
+    {
+        id: 2,
+        title: "유튜브만 찾던 아이가 먼저 '큐브 하자'고 졸라요!",
+        image: "images/testimonial-2.png",
+        content: "일방적인 영상만 보던 아이가, 캐릭터가 자기 말에 대답해주고 칭찬해주니 신나서 30분 내내 조잘거리네요.",
+        author: "- 5세 자녀",
+        pageUrl: null
+    },
+    {
+        id: 3,
+        title: "유튜브만 찾던 아이가 먼저 '큐브 하자'고 졸라요!",
+        image: "images/testimonial-3.png",
+        content: "일방적인 영상만 보던 아이가, 캐릭터가 자기 말에 대답해주고 칭찬해주니 신나서 30분 내내 조잘거리네요.",
+        author: "- 5세 자녀",
+        pageUrl: null
+    },
+    {
+        id: 4,
+        title: "유튜브만 찾던 아이가 먼저 '큐브 하자'고 졸라요!",
+        image: "images/testimonial-4.png",
+        content: "일방적인 영상만 보던 아이가, 캐릭터가 자기 말에 대답해주고 칭찬해주니 신나서 30분 내내 조잘거리네요.",
+        author: "- 5세 자녀",
+        pageUrl: null
+    },
+    {
+        id: 5,
+        title: "유튜브만 찾던 아이가 먼저 '큐브 하자'고 졸라요!",
+        image: "images/testimonial-5.png",
+        content: "일방적인 영상만 보던 아이가, 캐릭터가 자기 말에 대답해주고 칭찬해주니 신나서 30분 내내 조잘거리네요.",
+        author: "- 5세 자녀",
+        pageUrl: null
+    },
+    {
+        id: 6,
+        title: "유튜브만 찾던 아이가 먼저 '큐브 하자'고 졸라요!",
+        image: "images/testimonial-6.png",
+        content: "일방적인 영상만 보던 아이가, 캐릭터가 자기 말에 대답해주고 칭찬해주니 신나서 30분 내내 조잘거리네요.",
+        author: "- 5세 자녀",
+        pageUrl: null
+    }
+    // 새로운 후기를 추가하려면 위 형식으로 객체를 추가하세요
+    // 예:
+    // {
+    //     id: 7,
+    //     title: "새로운 후기 제목",
+    //     image: "images/testimonial-7.png",
+    //     content: "후기 내용",
+    //     author: "- 4세 자녀",
+    //     pageUrl: "https://example.com/testimonial/7" // 특정 페이지가 있으면 URL 입력
+    // }
+];
+
 // 출시 날짜 설정 (2025년 12월 18일 00:00:00)
 const launchDate = new Date('2025-12-18T00:00:00').getTime();
 
@@ -341,9 +406,17 @@ function goToResearchPage() {
 
 /**
  * 후기 페이지로 이동
- * @param {number} testimonialId - 후기 ID (선택사항)
+ * @param {number|string} testimonialId - 후기 ID 또는 페이지 URL
+ * @param {string} customUrl - 커스텀 URL (선택사항)
  */
-function goToTestimonialPage(testimonialId = null) {
+function goToTestimonialPage(testimonialId = null, customUrl = null) {
+    // 커스텀 URL이 있으면 해당 URL로 이동
+    if (customUrl) {
+        window.open(customUrl, '_blank');
+        return;
+    }
+    
+    // 기본 후기 페이지 URL 사용
     let url = API_CONFIG.TESTIMONIAL_PAGE_URL;
     if (testimonialId) {
         url += `?id=${testimonialId}`;
@@ -354,6 +427,78 @@ function goToTestimonialPage(testimonialId = null) {
     } else {
         console.warn('TESTIMONIAL_PAGE_URL이 설정되지 않았습니다.');
     }
+}
+
+// ============================================
+// 후기 카드 생성 함수
+// ============================================
+
+/**
+ * 후기 카드 HTML 생성
+ * @param {Object} testimonial - 후기 데이터 객체
+ * @returns {HTMLElement} 생성된 카드 요소
+ */
+function createTestimonialCard(testimonial) {
+    const card = document.createElement('div');
+    card.className = 'testimonial-card';
+    card.setAttribute('data-testimonial-id', testimonial.id);
+    
+    card.innerHTML = `
+        <h3 class="testimonial-title">${testimonial.title}</h3>
+        <div class="testimonial-image">
+            <img src="${testimonial.image}" alt="베타 테스터 후기" />
+        </div>
+        <p class="testimonial-content">${testimonial.content}</p>
+        <p class="testimonial-author">${testimonial.author}</p>
+        <button class="testimonial-button" data-testimonial-id="${testimonial.id}" data-page-url="${testimonial.pageUrl || ''}">자세히 보기</button>
+    `;
+    
+    return card;
+}
+
+/**
+ * 후기 슬라이더 초기화
+ */
+function initTestimonialSlider() {
+    const slider = document.getElementById('testimonialSlider');
+    if (!slider) return;
+    
+    // 기존 내용 제거
+    slider.innerHTML = '';
+    
+    // 후기 데이터가 없으면 종료
+    if (!TESTIMONIAL_DATA || TESTIMONIAL_DATA.length === 0) {
+        console.warn('후기 데이터가 없습니다.');
+        return;
+    }
+    
+    // 후기 카드 생성 및 추가
+    TESTIMONIAL_DATA.forEach(testimonial => {
+        const card = createTestimonialCard(testimonial);
+        slider.appendChild(card);
+    });
+    
+    // 무한 슬라이드를 위해 처음 데이터를 복제해서 추가
+    TESTIMONIAL_DATA.forEach(testimonial => {
+        const card = createTestimonialCard(testimonial);
+        slider.appendChild(card);
+    });
+    
+    // 후기 버튼 이벤트 리스너 추가
+    slider.querySelectorAll('.testimonial-button').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const testimonialId = button.getAttribute('data-testimonial-id');
+            const pageUrl = button.getAttribute('data-page-url');
+            
+            // pageUrl이 있으면 해당 URL로, 없으면 기본 후기 페이지로
+            if (pageUrl) {
+                goToTestimonialPage(testimonialId, pageUrl);
+            } else {
+                goToTestimonialPage(testimonialId);
+            }
+        });
+    });
 }
 
 // ============================================
@@ -371,17 +516,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 후기 자세히 보기 버튼들
-    document.querySelectorAll('.testimonial-button').forEach((button, index) => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            // 버튼이 속한 카드의 인덱스나 ID를 전달할 수 있음
-            // 예: 각 카드에 data-testimonial-id 속성을 추가하면 그 값을 사용
-            const card = button.closest('.testimonial-card');
-            const testimonialId = card ? card.getAttribute('data-testimonial-id') : index + 1;
-            goToTestimonialPage(testimonialId);
-        });
-    });
+    // 후기 슬라이더 초기화
+    initTestimonialSlider();
 });
 
 // 모달 외부 클릭시 닫기
