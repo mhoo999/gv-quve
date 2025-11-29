@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="social-proof">
-                    이미 <strong><span id="heroReservationCount">00</span>명</strong>이 예약했어요
+                    이미 <strong><span id="heroReservationCount">0</span>명</strong>이 예약했어요!
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
     <!-- Problem Section -->
     <section class="section bg-gray bg-image">
         <div class="container">
-            <h2 class="section-title">우리 아이 영상 시청, 괜찮을까요?</h2>
+            <h2 class="section-title">우리 아이 영상 시청,<br>괜찮을까요?</h2>
             <div class="problem-cards">
                 <div class="card">
                     <div class="card-icon">📊</div>
@@ -254,7 +254,7 @@
                     </div>
                 </div>
                 <div class="social-proof">
-                    이미 <strong><span id="ctaReservationCount">00</span>명</strong>이 예약했어요
+                    이미 <strong><span id="ctaReservationCount">0</span>명</strong>이 예약했어요!
                 </div>
             </div>
 
@@ -305,13 +305,6 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo"><img src="images/quve_logo.png" alt="QUVE" /></div>
-            <div class="footer-services">
-                <a href="#" id="supervieLink" class="footer-service-link">슈퍼브이</a>
-                <span>|</span>
-                <a href="#" id="superreadingLink" class="footer-service-link">슈퍼리딩</a>
-                <span>|</span>
-                <a href="#" id="quveLink" class="footer-service-link">큐브</a>
-            </div>
             <div class="footer-contact">
                 📧 문의: help@grovie.com<br>
                 📞 고객센터: 1588-0000<br>
@@ -366,10 +359,36 @@
 
     <!-- Sticky CTA -->
     <div id="stickyCta" class="sticky-cta">
+        <img src="images/sticky-image.png" alt="" class="sticky-image" />
         <div class="sticky-content">
             <div class="sticky-info">
-                <strong>🎁 100만원 상당 혜택</strong>
-                <p>지금까지 <span id="stickyReservationCount">00</span>명이 예약했어요</p>
+                <div class="sticky-title">🎁 100만원 상당 혜택 남은 시간</div>
+                <div class="sticky-timer-wrapper">
+                    <div class="sticky-timer-group">
+                        <div class="sticky-timer-label">일</div>
+                        <div class="sticky-timer-digits">
+                            <div class="sticky-flip-card"><span id="stickyDays1">0</span></div>
+                            <div class="sticky-flip-card"><span id="stickyDays2">0</span></div>
+                        </div>
+                    </div>
+                    <div class="sticky-timer-sep">:</div>
+                    <div class="sticky-timer-group">
+                        <div class="sticky-timer-label">시간</div>
+                        <div class="sticky-timer-digits">
+                            <div class="sticky-flip-card"><span id="stickyHours1">0</span></div>
+                            <div class="sticky-flip-card"><span id="stickyHours2">0</span></div>
+                        </div>
+                    </div>
+                    <div class="sticky-timer-sep">:</div>
+                    <div class="sticky-timer-group">
+                        <div class="sticky-timer-label">분</div>
+                        <div class="sticky-timer-digits">
+                            <div class="sticky-flip-card"><span id="stickyMinutes1">0</span></div>
+                            <div class="sticky-flip-card"><span id="stickyMinutes2">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sticky-count">이미 <strong><span id="stickyReservationCount">0</span>명</strong>이 예약했어요!</div>
             </div>
             <a href="#ctaSection" class="cta-button sticky-cta-button" onclick="scrollToForm(); return false;">지금 예약하기</a>
         </div>

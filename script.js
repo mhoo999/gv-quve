@@ -182,12 +182,20 @@ function updateCountdown() {
                 urgencyTimer.textContent = `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
             }
         }
+
+        // Sticky 타이머 업데이트
+        updateFlipCard('stickyDays', days);
+        updateFlipCard('stickyHours', hours);
+        updateFlipCard('stickyMinutes', minutes);
     } else {
         const expiredText = "출시되었습니다!";
         const urgencyTimer = document.getElementById('urgencyTimer');
         if (urgencyTimer) {
             urgencyTimer.textContent = expiredText;
         }
+        updateFlipCard('stickyDays', 0);
+        updateFlipCard('stickyHours', 0);
+        updateFlipCard('stickyMinutes', 0);
         // 플립 카드들도 00으로 설정
         updateFlipCard('heroDays', 0);
         updateFlipCard('heroHours', 0);
@@ -204,12 +212,69 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// 예약자 수 업데이트 함수 (실제 구현시 서버에서 가져오기)
+// ============================================
+// 예약자 수 관리
+// ============================================
+
+/**
+ * 예약자 수를 화면에 업데이트
+ * @param {number} count - 예약자 수
+ */
 function updateReservationCount(count) {
-    const countStr = count.toString().padStart(2, '0');
+    const countStr = count.toLocaleString('ko-KR');
     document.getElementById('heroReservationCount').textContent = countStr;
     document.getElementById('ctaReservationCount').textContent = countStr;
     document.getElementById('stickyReservationCount').textContent = countStr;
+}
+
+/**
+ * 백엔드에서 현재 예약자 수를 가져오기
+ * @returns {Promise<number>} 예약자 수
+ */
+async function fetchReservationCount() {
+    // TODO: 백엔드팀에서 제공하는 API 엔드포인트로 변경
+    const RESERVATION_COUNT_ENDPOINT = ''; // 예: 'https://api.quve.kr/reservations/count'
+
+    if (!RESERVATION_COUNT_ENDPOINT) {
+        console.warn('RESERVATION_COUNT_ENDPOINT가 설정되지 않았습니다. 데모 모드로 실행합니다.');
+        return 0; // 데모 모드: 0 반환
+    }
+
+    try {
+        const response = await fetch(RESERVATION_COUNT_ENDPOINT, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        // 백엔드 응답 형식에 따라 조정 필요
+        // 예: { count: 123 } 또는 { totalReservations: 123 }
+        return data.count || data.totalReservations || 0;
+    } catch (error) {
+        console.error('예약자 수 조회 실패:', error);
+        return 0; // 오류 발생 시 0 반환
+    }
+}
+
+/**
+ * 예약자 수 초기화 및 주기적 업데이트
+ */
+async function initReservationCount() {
+    // 초기 예약자 수 조회
+    const count = await fetchReservationCount();
+    updateReservationCount(count);
+
+    // 30초마다 예약자 수 갱신 (선택사항)
+    // setInterval(async () => {
+    //     const count = await fetchReservationCount();
+    //     updateReservationCount(count);
+    // }, 30000); // 30초
 }
 
 // Sticky CTA 표시/숨김
@@ -336,7 +401,15 @@ function initFAQList() {
 
 // 폼으로 스크롤
 function scrollToForm() {
-    document.getElementById('ctaSection').scrollIntoView({ behavior: 'smooth' });
+    const ctaSection = document.getElementById('ctaSection');
+    if (ctaSection) {
+        const heroStats = ctaSection.querySelector('.hero-stats');
+        if (heroStats) {
+            heroStats.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+            ctaSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 }
 
 // ctaSection으로 부드럽게 스크롤
@@ -344,10 +417,18 @@ function smoothScrollToCta(event) {
     event.preventDefault();
     const ctaSection = document.getElementById('ctaSection');
     if (ctaSection) {
-        ctaSection.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-        });
+        const heroStats = ctaSection.querySelector('.hero-stats');
+        if (heroStats) {
+            heroStats.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        } else {
+            ctaSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
     }
 }
 
@@ -861,6 +942,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 링크 초기화
     initLinks();
+
+    // 예약자 수 초기화
+    initReservationCount();
 });
 
 // 모달 외부 클릭시 닫기
