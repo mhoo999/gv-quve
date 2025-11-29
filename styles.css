@@ -861,16 +861,17 @@ body {
 }
 
 .final-cta .container {
-    max-width: 100%;
-    padding: 0;
+    max-width: 600px;
+    padding: 0 24px;
 }
 
 .sliding-testimonials {
     overflow: hidden;
     width: 100%;
+    max-width: 100%;
     padding: 40px 0;
     background: rgba(255,255,255,0.1);
-    margin-bottom: 30px;
+    margin: 0 0 30px 0;
 }
 
 .testimonial-main-title {
