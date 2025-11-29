@@ -127,11 +127,13 @@ function updateCountdown() {
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Hero 카운트다운 업데이트
+        updateFlipCard('heroDays', days);
         updateFlipCard('heroHours', hours);
         updateFlipCard('heroMinutes', minutes);
         updateFlipCard('heroSeconds', seconds);
 
         // CTA 카운트다운 업데이트
+        updateFlipCard('ctaDays', days);
         updateFlipCard('ctaHours', hours);
         updateFlipCard('ctaMinutes', minutes);
         updateFlipCard('ctaSeconds', seconds);
@@ -149,9 +151,11 @@ function updateCountdown() {
             urgencyTimer.textContent = expiredText;
         }
         // 플립 카드들도 00으로 설정
+        updateFlipCard('heroDays', 0);
         updateFlipCard('heroHours', 0);
         updateFlipCard('heroMinutes', 0);
         updateFlipCard('heroSeconds', 0);
+        updateFlipCard('ctaDays', 0);
         updateFlipCard('ctaHours', 0);
         updateFlipCard('ctaMinutes', 0);
         updateFlipCard('ctaSeconds', 0);
