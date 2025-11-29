@@ -870,9 +870,9 @@ body {
     right: -10%;
     bottom: -10%;
     background-image:
-        radial-gradient(circle, rgba(0, 0, 0, 0.1) 80px, transparent 80px);
-    background-size: 300px 300px;
-    background-position: 0 0, 150px 150px;
+        radial-gradient(circle, rgba(0, 0, 0, 0.12) 60px, transparent 60px);
+    background-size: 180px 180px;
+    background-position: 0 0;
     animation: pulse-wave 8s ease-in-out infinite;
     z-index: 0;
 }
@@ -885,9 +885,9 @@ body {
     right: -10%;
     bottom: -10%;
     background-image:
-        radial-gradient(circle, rgba(0, 0, 0, 0.05) 60px, transparent 60px);
-    background-size: 280px 280px;
-    background-position: 140px 140px;
+        radial-gradient(circle, rgba(0, 0, 0, 0.06) 50px, transparent 50px);
+    background-size: 180px 180px;
+    background-position: 90px 90px;
     animation: pulse-wave 8s ease-in-out infinite reverse;
     z-index: 0;
 }
