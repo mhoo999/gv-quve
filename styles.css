@@ -862,43 +862,6 @@ body {
     overflow: hidden;
 }
 
-.wave-pattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.wave-circle {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.1);
-    animation: circle-pulse 3s ease-in-out infinite;
-}
-
-@keyframes circle-pulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 0.8;
-    }
-    50% {
-        transform: scale(1.2);
-        opacity: 1;
-    }
-}
-
-/* 애니메이션 감소 설정 사용자를 위한 대응 */
-@media (prefers-reduced-motion: reduce) {
-    .wave-circle {
-        animation: none;
-    }
-}
-
 .final-cta .container {
     max-width: 800px;
     padding: 0 24px;

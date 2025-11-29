@@ -842,35 +842,6 @@ function initLinks() {
     }
 }
 
-/**
- * 파도 패턴 초기화
- */
-function initWavePattern() {
-    const wavePattern = document.getElementById('wavePattern');
-    if (!wavePattern) return;
-
-    const cols = 8;
-    const rows = 6;
-    const spacing = 180;
-
-    for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-            const circle = document.createElement('div');
-            circle.className = 'wave-circle';
-
-            // 위치 설정
-            circle.style.left = `${col * spacing - 100}px`;
-            circle.style.top = `${row * spacing - 100}px`;
-
-            // 대각선 파도 효과를 위한 delay 계산
-            const delay = (row + col) * 0.15;
-            circle.style.animationDelay = `${delay}s`;
-
-            wavePattern.appendChild(circle);
-        }
-    }
-}
-
 // DOM이 로드된 후 초기화
 document.addEventListener('DOMContentLoaded', () => {
     // 연구 결과 자세히 보기 버튼
@@ -890,9 +861,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 링크 초기화
     initLinks();
-
-    // 파도 패턴 초기화
-    initWavePattern();
 });
 
 // 모달 외부 클릭시 닫기
