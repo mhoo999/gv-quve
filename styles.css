@@ -859,6 +859,11 @@ body {
     padding: 120px 24px;
 }
 
+.final-cta .container {
+    max-width: 100%;
+    padding: 0;
+}
+
 .sliding-testimonials {
     overflow: hidden;
     width: 100%;
