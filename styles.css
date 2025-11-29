@@ -1371,7 +1371,7 @@ body {
     .hero-stats {
         padding: 24px 28px;
         margin-top: 32px;
-        width: 320px;
+        width: 100%;
     }
 
     .countdown-timer {
@@ -1609,7 +1609,7 @@ body {
     .hero-stats {
         padding: 20px 24px;
         margin-top: 28px;
-        width: 280px;
+        width: 100%;
     }
 
     .countdown {
