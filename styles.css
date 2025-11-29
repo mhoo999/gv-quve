@@ -1331,6 +1331,13 @@ body {
     white-space: nowrap;
     flex-shrink: 0;
     font-size: 15px;
+    background: #8C00D4 !important;
+    color: #ffffff !important;
+}
+
+.sticky-cta-button:hover {
+    background: #7A00C0 !important;
+    color: #ffffff !important;
 }
 
 /* Responsive */
