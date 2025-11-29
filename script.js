@@ -558,7 +558,13 @@ async function handleFormSubmit(e) {
         if (API_CONFIG.RESERVATION_ENDPOINT) {
             const response = await submitReservation(formData);
             console.log('예약 성공:', response);
-            
+
+            // 중복 예약 체크 (백엔드에서 duplicate 또는 isDuplicate 플래그 반환 시)
+            if (response.duplicate || response.isDuplicate) {
+                document.getElementById('duplicateModal').classList.add('show');
+                return;
+            }
+
             // 성공 모달 표시
             document.getElementById('successName').textContent = formData.name;
             document.getElementById('successModal').classList.add('show');
@@ -640,6 +646,11 @@ function confirmExit() {
 // 성공 모달 닫기
 function closeSuccessModal() {
     document.getElementById('successModal').classList.remove('show');
+}
+
+// 중복 예약 모달 닫기
+function closeDuplicateModal() {
+    document.getElementById('duplicateModal').classList.remove('show');
 }
 
 // 리퍼럴 공유
