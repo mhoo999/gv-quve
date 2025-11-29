@@ -752,7 +752,7 @@ body {
 }
 
 .faq-answer {
-    padding: 16px 24px 0 24px;
+    padding: 0 24px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s, padding 0.3s;
@@ -1758,7 +1758,7 @@ body {
 
     .faq-answer {
         font-size: 13px;
-        padding: 16px 16px 0 16px;
+        padding: 0 16px;
     }
 
     .faq-item.active .faq-answer {
