@@ -974,8 +974,8 @@ body {
 .testimonial-button {
     width: 100%;
     padding: 12px 24px;
-    background: #8C00D4;
-    color: #ffffff;
+    background: #FFD74D;
+    color: #191f28;
     border: none;
     border-radius: 12px;
     font-size: 14px;
@@ -986,7 +986,7 @@ body {
 }
 
 .testimonial-button:hover {
-    background: #7A00C0;
+    background: #FFC933;
     transform: translateY(-1px);
 }
 
@@ -1469,6 +1469,7 @@ body {
     .flip-card {
         padding: 10px 8px;
         min-width: 30px;
+        border-radius: 3px;
     }
 
     .flip-number {
@@ -1747,6 +1748,7 @@ body {
     .flip-card {
         padding: 8px 6px;
         min-width: 26px;
+        border-radius: 3px;
     }
 
     .flip-number {
