@@ -870,21 +870,21 @@ body {
     right: 0;
     bottom: 0;
     background-image:
-        radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-    background-size: 24px 24px;
+        radial-gradient(circle, rgba(255, 255, 255, 0.15) 2px, transparent 2px);
+    background-size: 32px 32px;
     z-index: 0;
 }
 
 .final-cta::after {
     content: '';
     position: absolute;
-    top: 12px;
-    left: 12px;
+    top: 16px;
+    left: 16px;
     right: 0;
     bottom: 0;
     background-image:
-        radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 24px 24px;
+        radial-gradient(circle, rgba(255, 255, 255, 0.08) 2px, transparent 2px);
+    background-size: 32px 32px;
     z-index: 0;
 }
 
