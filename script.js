@@ -132,9 +132,10 @@ const TESTIMONIAL_DATA = [
 // 출시 날짜 설정 (2025년 12월 18일 00:00:00)
 const launchDate = new Date('2025-12-18T00:00:00').getTime();
 
-// 숫자를 두 자리 문자열로 포맷
+// 숫자를 두 자리 문자열로 포맷 (99 초과 시 99로 제한)
 function formatTwoDigits(num) {
-    return num.toString().padStart(2, '0');
+    const limited = Math.min(num, 99);
+    return limited.toString().padStart(2, '0');
 }
 
 // 플립 카드 업데이트 함수
@@ -172,10 +173,14 @@ function updateCountdown() {
         updateFlipCard('ctaSeconds', seconds);
 
         // Urgency 타이머 (기존 텍스트 형식 유지)
-        const countdownText = `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
         const urgencyTimer = document.getElementById('urgencyTimer');
         if (urgencyTimer) {
-            urgencyTimer.textContent = countdownText;
+            // 99일 초과 시 간단한 메시지로 표시
+            if (days > 99) {
+                urgencyTimer.textContent = `${days}일 남음`;
+            } else {
+                urgencyTimer.textContent = `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+            }
         }
     } else {
         const expiredText = "출시되었습니다!";
@@ -213,11 +218,17 @@ window.addEventListener('scroll', () => {
     const stickyCta = document.getElementById('stickyCta');
     const ctaSection = document.getElementById('ctaSection');
     const bgGraySection = document.querySelector('.bg-gray.bg-image');
+
+    // 필수 요소 존재 여부 확인
+    if (!stickyCta || !ctaSection || !bgGraySection) {
+        return;
+    }
+
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
+
     // bg-gray bg-image 섹션 위치 계산
     const bgGraySectionTop = bgGraySection.offsetTop;
-    
+
     // CTA 섹션 위치 계산
     const ctaSectionTop = ctaSection.offsetTop;
     const ctaSectionBottom = ctaSectionTop + ctaSection.offsetHeight;
@@ -225,9 +236,13 @@ window.addEventListener('scroll', () => {
     // bg-gray bg-image 섹션이 화면에 보이기 시작할 때부터 표시
     // (섹션의 상단이 화면 하단에 도달했을 때)
     const isBgGrayVisible = scrollTop + window.innerHeight >= bgGraySectionTop;
-    
+
+    // CTA 섹션이 화면 안에 있는지 확인
+    const isCtaVisible = scrollTop + window.innerHeight > ctaSectionTop &&
+                         scrollTop < ctaSectionBottom;
+
     // bg-gray 섹션이 보이고, CTA 섹션이 화면에 보이지 않을 때만 표시
-    if (isBgGrayVisible && (scrollTop < ctaSectionTop - window.innerHeight || scrollTop > ctaSectionBottom)) {
+    if (isBgGrayVisible && !isCtaVisible) {
         stickyCta.classList.add('visible');
     } else {
         stickyCta.classList.remove('visible');
@@ -255,17 +270,28 @@ for (let i = 24; i <= 72; i++) {
 function createFAQItem(faq) {
     const item = document.createElement('div');
     item.className = 'faq-item';
-    
-    item.innerHTML = `
-        <div class="faq-question">
-            <span>${faq.question}</span>
-            <span class="faq-icon">▼</span>
-        </div>
-        <div class="faq-answer">
-            ${faq.answer}
-        </div>
-    `;
-    
+
+    // XSS 방지를 위해 textContent 사용
+    const questionDiv = document.createElement('div');
+    questionDiv.className = 'faq-question';
+
+    const questionText = document.createElement('span');
+    questionText.textContent = faq.question;
+
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'faq-icon';
+    iconSpan.textContent = '▼';
+
+    questionDiv.appendChild(questionText);
+    questionDiv.appendChild(iconSpan);
+
+    const answerDiv = document.createElement('div');
+    answerDiv.className = 'faq-answer';
+    answerDiv.textContent = faq.answer;
+
+    item.appendChild(questionDiv);
+    item.appendChild(answerDiv);
+
     return item;
 }
 
@@ -328,6 +354,13 @@ function smoothScrollToCta(event) {
 // 전화번호 자동 포맷
 document.getElementById('phone').addEventListener('input', (e) => {
     let value = e.target.value.replace(/[^0-9]/g, '');
+
+    // 11자리로 제한
+    if (value.length > 11) {
+        value = value.slice(0, 11);
+    }
+
+    // 포맷 적용
     if (value.length > 3 && value.length <= 7) {
         value = value.slice(0, 3) + '-' + value.slice(3);
     } else if (value.length > 7) {
@@ -335,6 +368,33 @@ document.getElementById('phone').addEventListener('input', (e) => {
     }
     e.target.value = value;
 });
+
+/**
+ * 전화번호 유효성 검증
+ * @param {string} phone - 전화번호 (하이픈 포함 가능)
+ * @returns {boolean} 유효 여부
+ */
+function validatePhone(phone) {
+    // 하이픈 제거
+    const cleaned = phone.replace(/-/g, '');
+
+    // 010, 011, 016, 017, 018, 019로 시작하는 10-11자리 숫자
+    const phoneRegex = /^01[0-9]\d{7,8}$/;
+
+    return phoneRegex.test(cleaned);
+}
+
+/**
+ * 이름 유효성 검증
+ * @param {string} name - 이름
+ * @returns {boolean} 유효 여부
+ */
+function validateName(name) {
+    // 2-20자, 한글/영문/공백만 허용
+    const nameRegex = /^[가-힣a-zA-Z\s]{2,20}$/;
+
+    return nameRegex.test(name.trim());
+}
 
 // ============================================
 // API 호출 함수
@@ -392,10 +452,24 @@ async function handleFormSubmit(e) {
     e.preventDefault();
 
     const formData = collectFormData();
-    
-    // 유효성 검사
+
+    // 기본 필수 항목 검사
     if (!formData.name || !formData.phone || !formData.childAge || !formData.agree) {
         alert('모든 필수 항목을 입력해주세요.');
+        return;
+    }
+
+    // 이름 유효성 검사
+    if (!validateName(formData.name)) {
+        alert('이름은 2-20자의 한글 또는 영문으로 입력해주세요.');
+        document.getElementById('name').focus();
+        return;
+    }
+
+    // 전화번호 유효성 검사
+    if (!validatePhone(formData.phone)) {
+        alert('올바른 휴대폰 번호를 입력해주세요. (예: 010-1234-5678)');
+        document.getElementById('phone').focus();
         return;
     }
 
@@ -446,21 +520,41 @@ document.getElementById('reservationForm').addEventListener('submit', handleForm
 
 // Exit Intent 감지
 let exitIntentShown = false;
+let exitIntentTimeout = null;
+
 document.addEventListener('mouseleave', (e) => {
+    // 상단으로 마우스가 나갔을 때만 (페이지 나가기 의도)
     if (e.clientY < 0 && !exitIntentShown) {
         exitIntentShown = true;
-        document.getElementById('exitModal').classList.add('show');
+        const modal = document.getElementById('exitModal');
+        if (modal) {
+            modal.classList.add('show');
+
+            // 5분 후 다시 표시 가능하도록 설정
+            clearTimeout(exitIntentTimeout);
+            exitIntentTimeout = setTimeout(() => {
+                exitIntentShown = false;
+            }, 5 * 60 * 1000); // 5분
+        }
     }
 });
 
 // Exit 모달 닫기
 function closeExitModal() {
-    document.getElementById('exitModal').classList.remove('show');
+    const modal = document.getElementById('exitModal');
+    if (modal) {
+        modal.classList.remove('show');
+    }
 }
 
 // 페이지 나가기 확인
 function confirmExit() {
     closeExitModal();
+    // 모달을 닫고 30초 후 다시 표시 가능하게 설정
+    clearTimeout(exitIntentTimeout);
+    exitIntentTimeout = setTimeout(() => {
+        exitIntentShown = false;
+    }, 30 * 1000); // 30초
 }
 
 // 성공 모달 닫기
@@ -550,17 +644,39 @@ function createTestimonialCard(testimonial) {
     const card = document.createElement('div');
     card.className = 'testimonial-card';
     card.setAttribute('data-testimonial-id', testimonial.id);
-    
-    card.innerHTML = `
-        <h3 class="testimonial-title">${testimonial.title}</h3>
-        <div class="testimonial-image">
-            <img src="${testimonial.image}" alt="베타 테스터 후기" />
-        </div>
-        <p class="testimonial-content">${testimonial.content}</p>
-        <p class="testimonial-author">${testimonial.author}</p>
-        <button class="testimonial-button" data-testimonial-id="${testimonial.id}" data-page-url="${testimonial.pageUrl || ''}">자세히 보기</button>
-    `;
-    
+
+    // XSS 방지를 위해 textContent 사용
+    const title = document.createElement('h3');
+    title.className = 'testimonial-title';
+    title.textContent = testimonial.title;
+
+    const imageDiv = document.createElement('div');
+    imageDiv.className = 'testimonial-image';
+    const img = document.createElement('img');
+    img.src = testimonial.image;
+    img.alt = '베타 테스터 후기';
+    imageDiv.appendChild(img);
+
+    const content = document.createElement('p');
+    content.className = 'testimonial-content';
+    content.textContent = testimonial.content;
+
+    const author = document.createElement('p');
+    author.className = 'testimonial-author';
+    author.textContent = testimonial.author;
+
+    const button = document.createElement('button');
+    button.className = 'testimonial-button';
+    button.setAttribute('data-testimonial-id', testimonial.id);
+    button.setAttribute('data-page-url', testimonial.pageUrl || '');
+    button.textContent = '자세히 보기';
+
+    card.appendChild(title);
+    card.appendChild(imageDiv);
+    card.appendChild(content);
+    card.appendChild(author);
+    card.appendChild(button);
+
     return card;
 }
 
