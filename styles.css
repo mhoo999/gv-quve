@@ -870,10 +870,10 @@ body {
     right: -10%;
     bottom: -10%;
     background-image:
-        radial-gradient(circle, rgba(0, 0, 0, 0.1) 60px, transparent 60px);
+        radial-gradient(circle, rgba(0, 0, 0, 0.15) 60px, transparent 60px);
     background-size: 180px 180px;
     background-position: 0 0;
-    animation: pulse-wave 8s ease-in-out infinite;
+    animation: stadium-wave 3s linear infinite;
     z-index: 0;
 }
 
@@ -885,21 +885,22 @@ body {
     right: -10%;
     bottom: -10%;
     background-image:
-        radial-gradient(circle, rgba(0, 0, 0, 0.1) 60px, transparent 60px);
+        radial-gradient(circle, rgba(0, 0, 0, 0.08) 60px, transparent 60px);
     background-size: 180px 180px;
     background-position: 90px 90px;
-    animation: pulse-wave 8s ease-in-out infinite reverse;
+    animation: stadium-wave 3s linear infinite;
+    animation-delay: 0.3s;
     z-index: 0;
 }
 
-@keyframes pulse-wave {
-    0%, 100% {
-        transform: scale(1);
+@keyframes stadium-wave {
+    0% {
+        background-position: 0 0;
         opacity: 1;
     }
-    50% {
-        transform: scale(1.05);
-        opacity: 0.8;
+    100% {
+        background-position: 180px 180px;
+        opacity: 1;
     }
 }
 
