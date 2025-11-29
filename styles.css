@@ -816,6 +816,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
     transition: background 0.2s;
     font-size: 15px;
     color: #191f28;
