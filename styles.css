@@ -17,7 +17,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 24px;
 }
 
 /* Hero Section */
@@ -405,25 +405,6 @@ body {
     margin: 0 auto 64px;
 }
 
-.solution-intro p.main-text {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 24px;
-    color: #191f28;
-    letter-spacing: -0.01em;
-    line-height: 1.5;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 4px;
-    flex-wrap: wrap;
-    background: none !important;
-    padding: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-}
-
 .solution-intro p {
     font-size: 16px;
     line-height: 1.7;
@@ -436,6 +417,20 @@ body {
     letter-spacing: normal;
     box-shadow: none;
     border: none;
+}
+
+.solution-intro p.main-text {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #191f28;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
 }
 
 .experiment-section {
@@ -1407,18 +1402,18 @@ body {
     white-space: nowrap;
 }
 
-.sticky-cta-button {
+.sticky-cta .sticky-cta-button {
     padding: 14px 28px;
     white-space: nowrap;
     flex-shrink: 0;
     font-size: 15px;
-    background: #8C00D4 !important;
-    color: #ffffff !important;
+    background: #8C00D4;
+    color: #ffffff;
 }
 
-.sticky-cta-button:hover {
-    background: #7A00C0 !important;
-    color: #ffffff !important;
+.sticky-cta .sticky-cta-button:hover {
+    background: #7A00C0;
+    color: #ffffff;
 }
 
 /* Responsive */
