@@ -862,52 +862,39 @@ body {
     overflow: hidden;
 }
 
-.final-cta::before {
-    content: '';
+.wave-pattern {
     position: absolute;
-    top: -10%;
-    left: -10%;
-    right: -10%;
-    bottom: -10%;
-    background-image:
-        radial-gradient(circle, rgba(0, 0, 0, 0.12) 60px, transparent 60px);
-    background-size: 180px 180px;
-    background-position: 0 0;
-    animation: wave-pulse 2.5s ease-in-out infinite;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 0;
+    pointer-events: none;
 }
 
-.final-cta::after {
-    content: '';
+.wave-circle {
     position: absolute;
-    top: -10%;
-    left: -10%;
-    right: -10%;
-    bottom: -10%;
-    background-image:
-        radial-gradient(circle, rgba(0, 0, 0, 0.12) 60px, transparent 60px);
-    background-size: 180px 180px;
-    background-position: 0 0;
-    animation: wave-pulse 2.5s ease-in-out infinite;
-    animation-delay: 0.4s;
-    z-index: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    animation: circle-pulse 3s ease-in-out infinite;
 }
 
-@keyframes wave-pulse {
+@keyframes circle-pulse {
     0%, 100% {
         transform: scale(1);
-        opacity: 0.6;
+        opacity: 0.8;
     }
     50% {
-        transform: scale(1.15);
+        transform: scale(1.2);
         opacity: 1;
     }
 }
 
 /* 애니메이션 감소 설정 사용자를 위한 대응 */
 @media (prefers-reduced-motion: reduce) {
-    .final-cta::before,
-    .final-cta::after {
+    .wave-circle {
         animation: none;
     }
 }
