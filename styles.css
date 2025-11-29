@@ -870,7 +870,7 @@ body {
     right: -10%;
     bottom: -10%;
     background-image:
-        radial-gradient(circle, rgba(0, 0, 0, 0.12) 60px, transparent 60px);
+        radial-gradient(circle, rgba(0, 0, 0, 0.1) 60px, transparent 60px);
     background-size: 180px 180px;
     background-position: 0 0;
     animation: pulse-wave 8s ease-in-out infinite;
@@ -885,7 +885,7 @@ body {
     right: -10%;
     bottom: -10%;
     background-image:
-        radial-gradient(circle, rgba(0, 0, 0, 0.06) 50px, transparent 50px);
+        radial-gradient(circle, rgba(0, 0, 0, 0.1) 60px, transparent 60px);
     background-size: 180px 180px;
     background-position: 90px 90px;
     animation: pulse-wave 8s ease-in-out infinite reverse;
