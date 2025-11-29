@@ -2,10 +2,39 @@
 // CONFIG: 백엔드 연동 설정
 // ============================================
 // TODO: 백엔드팀으로부터 받은 엔드포인트로 변경
+//
+// [중요] 중복 예약 처리 방법:
+// ----------------------------------------
+// 백엔드에서 RESERVATION_ENDPOINT로 POST 요청을 받으면,
+// 전화번호를 확인하여 이미 예약된 번호인지 체크해주세요.
+//
+// 1. 중복인 경우 응답 예시:
+//    {
+//        "duplicate": true,           // 또는 "isDuplicate": true
+//        "message": "이미 예약된 번호입니다"
+//    }
+//    → 화면에 "⚠️ 중복 예약" 모달이 표시됩니다
+//
+// 2. 정상 예약인 경우 응답 예시:
+//    {
+//        "duplicate": false,          // 또는 "isDuplicate": false
+//        "totalReservations": 1234,   // 전체 예약자 수 (선택사항)
+//        "message": "예약이 완료되었습니다"
+//    }
+//    → 화면에 "✅ 사전 예약 완료!" 모달이 표시됩니다
+//
+// 3. 요청 데이터 형식:
+//    {
+//        "name": "홍길동",
+//        "phone": "010-1234-5678",
+//        "childAge": 36,              // 개월 수 (24~72)
+//        "agree": true
+//    }
+// ----------------------------------------
 const API_CONFIG = {
     // 예약 정보 전송 API
     RESERVATION_ENDPOINT: '', // 예: 'https://api.quve.kr/reservations'
-    
+
     // 페이지 URL
     RESEARCH_PAGE_URL: 'https://example.com/research', // 연구 결과 자세히 보기 페이지
     TESTIMONIAL_PAGE_URL: 'https://example.com/testimonials', // 후기 페이지
@@ -559,7 +588,30 @@ async function handleFormSubmit(e) {
             const response = await submitReservation(formData);
             console.log('예약 성공:', response);
 
-            // 중복 예약 체크 (백엔드에서 duplicate 또는 isDuplicate 플래그 반환 시)
+            // ============================================
+            // 중복 예약 체크 (백엔드 개발자 가이드)
+            // ============================================
+            // 백엔드에서 duplicate 또는 isDuplicate 플래그를 true로 반환하면 중복 모달 표시
+            //
+            // 예시 응답 1 - 중복 예약인 경우:
+            // {
+            //     "duplicate": true,
+            //     "message": "이미 예약된 번호입니다"
+            // }
+            //
+            // 예시 응답 2 - 중복 예약인 경우 (다른 키 사용):
+            // {
+            //     "isDuplicate": true,
+            //     "message": "이미 예약된 번호입니다"
+            // }
+            //
+            // 예시 응답 3 - 정상 예약인 경우:
+            // {
+            //     "duplicate": false,
+            //     "totalReservations": 1234,
+            //     "message": "예약이 완료되었습니다"
+            // }
+            // ============================================
             if (response.duplicate || response.isDuplicate) {
                 document.getElementById('duplicateModal').classList.add('show');
                 return;
@@ -648,7 +700,12 @@ function closeSuccessModal() {
     document.getElementById('successModal').classList.remove('show');
 }
 
-// 중복 예약 모달 닫기
+/**
+ * 중복 예약 모달 닫기
+ *
+ * 이미 예약된 번호로 재예약 시도 시 표시되는 모달을 닫습니다.
+ * HTML의 duplicateModal 요소에서 'show' 클래스를 제거하여 모달을 숨깁니다.
+ */
 function closeDuplicateModal() {
     document.getElementById('duplicateModal').classList.remove('show');
 }
