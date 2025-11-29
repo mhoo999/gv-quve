@@ -1536,7 +1536,6 @@ body {
 
     /* Footer */
     .footer-services {
-        flex-direction: column;
         gap: 10px;
     }
 
