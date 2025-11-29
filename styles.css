@@ -865,27 +865,50 @@ body {
 .final-cta::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -10%;
+    left: -10%;
+    right: -10%;
+    bottom: -10%;
     background-image:
-        radial-gradient(circle, rgba(255, 255, 255, 0.15) 2px, transparent 2px);
-    background-size: 32px 32px;
+        radial-gradient(circle, rgba(0, 0, 0, 0.1) 80px, transparent 80px);
+    background-size: 300px 300px;
+    background-position: 0 0, 150px 150px;
+    animation: pulse-wave 8s ease-in-out infinite;
     z-index: 0;
 }
 
 .final-cta::after {
     content: '';
     position: absolute;
-    top: 16px;
-    left: 16px;
-    right: 0;
-    bottom: 0;
+    top: -10%;
+    left: -10%;
+    right: -10%;
+    bottom: -10%;
     background-image:
-        radial-gradient(circle, rgba(255, 255, 255, 0.08) 2px, transparent 2px);
-    background-size: 32px 32px;
+        radial-gradient(circle, rgba(0, 0, 0, 0.05) 60px, transparent 60px);
+    background-size: 280px 280px;
+    background-position: 140px 140px;
+    animation: pulse-wave 8s ease-in-out infinite reverse;
     z-index: 0;
+}
+
+@keyframes pulse-wave {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+/* 애니메이션 감소 설정 사용자를 위한 대응 */
+@media (prefers-reduced-motion: reduce) {
+    .final-cta::before,
+    .final-cta::after {
+        animation: none;
+    }
 }
 
 .final-cta .container {
