@@ -496,13 +496,13 @@ body {
 
 .experiment-item.quve {
     border: 1px solid rgba(140,0,212,0.2);
-    background: linear-gradient(135deg, #fafbff 0%, #f7f8ff 100%);
+    background: #fafbfc;
 }
 
 .experiment-item.quve:hover {
     transform: scale(1.03);
-    border-color: rgba(140,0,212,0.3);
-    box-shadow: 0 4px 16px rgba(140,0,212,0.1);
+    border-color: rgba(140,0,212,0.35);
+    box-shadow: 0 4px 16px rgba(140,0,212,0.12);
 }
 
 .experiment-icon {
