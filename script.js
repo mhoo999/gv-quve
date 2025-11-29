@@ -386,15 +386,8 @@ function initFAQList() {
     faqList.querySelectorAll('.faq-question').forEach(question => {
         question.addEventListener('click', () => {
             const item = question.parentElement;
-            const wasActive = item.classList.contains('active');
-
-            // 다른 FAQ 아이템들 닫기
-            faqList.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-
-            // 클릭한 FAQ가 닫혀있었으면 열기
-            if (!wasActive) {
-                item.classList.add('active');
-            }
+            // 클릭한 FAQ만 토글 (여러 개 동시 열기 가능)
+            item.classList.toggle('active');
         });
     });
 }
