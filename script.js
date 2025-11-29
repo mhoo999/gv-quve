@@ -32,6 +32,39 @@ const LINK_CONFIG = {
 };
 
 // ============================================
+// FAQ DATA: 자주 묻는 질문 데이터
+// ============================================
+// TODO: 나중에 FAQ를 추가할 때 이 배열에 객체만 추가하면 됩니다
+const FAQ_DATA = [
+    {
+        question: "아이가 부끄러움이 많아서 대답을 잘 못 할 것 같은데 괜찮나요?",
+        answer: "괜찮아요! 실제로 소리 내어 대답하지 않아도 아이의 이름이 불리고, 질문을 듣는 순간 아이의 뇌는 답변에 대해 생각하게 됩니다. 이 과정만으로도 뇌가 활발하게 자극받아 언어 발달과 사고력 향상에 도움이 됩니다."
+    },
+    {
+        question: "태블릿이 꼭 필요한가요?",
+        answer: "아이패드, 갤럭시탭 등 태블릿 또는 스마트폰에서 모두 사용 가능합니다. iOS와 Android 모두 지원합니다."
+    },
+    {
+        question: "와이파이가 없어도 되나요?",
+        answer: "콘텐츠를 다운로드한 후 오프라인에서 재생이 가능합니다. 외출 시에도 걱정 없이 사용하실 수 있어요."
+    },
+    {
+        question: "무료 체험 후 자동 결제되나요?",
+        answer: "❌ 아니요. 체험 종료 전에 안내 메시지를 보내드리며, 고객님의 동의 후에만 결제가 진행됩니다."
+    },
+    {
+        question: "환불이 가능한가요?",
+        answer: "✅ 7일 이내 100% 환불이 가능합니다. 고객님의 만족이 최우선입니다."
+    }
+    // 새로운 FAQ를 추가하려면 위 형식으로 객체를 추가하세요
+    // 예:
+    // {
+    //     question: "새로운 질문",
+    //     answer: "답변 내용"
+    // }
+];
+
+// ============================================
 // TESTIMONIAL DATA: 후기 데이터
 // ============================================
 // TODO: 나중에 후기를 추가할 때 이 배열에 객체만 추가하면 됩니다
@@ -210,19 +243,70 @@ for (let i = 24; i <= 72; i++) {
     childAgeSelect.appendChild(option);
 }
 
-// FAQ 토글
-document.querySelectorAll('.faq-question').forEach(question => {
-    question.addEventListener('click', () => {
-        const item = question.parentElement;
-        const wasActive = item.classList.contains('active');
+// ============================================
+// FAQ 관련 함수
+// ============================================
 
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+/**
+ * FAQ 아이템 HTML 생성
+ * @param {Object} faq - FAQ 데이터 객체
+ * @returns {HTMLElement} 생성된 FAQ 아이템 요소
+ */
+function createFAQItem(faq) {
+    const item = document.createElement('div');
+    item.className = 'faq-item';
+    
+    item.innerHTML = `
+        <div class="faq-question">
+            <span>${faq.question}</span>
+            <span class="faq-icon">▼</span>
+        </div>
+        <div class="faq-answer">
+            ${faq.answer}
+        </div>
+    `;
+    
+    return item;
+}
 
-        if (!wasActive) {
-            item.classList.add('active');
-        }
+/**
+ * FAQ 리스트 초기화
+ */
+function initFAQList() {
+    const faqList = document.getElementById('faqList');
+    if (!faqList) return;
+    
+    // 기존 내용 제거
+    faqList.innerHTML = '';
+    
+    // FAQ 데이터가 없으면 종료
+    if (!FAQ_DATA || FAQ_DATA.length === 0) {
+        console.warn('FAQ 데이터가 없습니다.');
+        return;
+    }
+    
+    // FAQ 아이템 생성 및 추가
+    FAQ_DATA.forEach(faq => {
+        const item = createFAQItem(faq);
+        faqList.appendChild(item);
     });
-});
+    
+    // FAQ 토글 이벤트 리스너 추가
+    faqList.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const item = question.parentElement;
+            const wasActive = item.classList.contains('active');
+
+            // 다른 FAQ 아이템들 닫기
+            faqList.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+            // 클릭한 FAQ가 닫혀있었으면 열기
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+}
 
 // 폼으로 스크롤
 function scrollToForm() {
@@ -655,6 +739,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 후기 슬라이더 초기화
     initTestimonialSlider();
+    
+    // FAQ 리스트 초기화
+    initFAQList();
     
     // 링크 초기화
     initLinks();
