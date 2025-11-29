@@ -599,6 +599,12 @@ let exitIntentTimeout = null;
 document.addEventListener('mouseleave', (e) => {
     // 상단으로 마우스가 나갔을 때만 (페이지 나가기 의도)
     if (e.clientY < 0 && !exitIntentShown) {
+        // 성공 모달이 열려있으면 Exit Intent 모달을 띄우지 않음
+        const successModal = document.getElementById('successModal');
+        if (successModal && successModal.classList.contains('show')) {
+            return;
+        }
+
         exitIntentShown = true;
         const modal = document.getElementById('exitModal');
         if (modal) {
