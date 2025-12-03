@@ -122,7 +122,7 @@ body {
 .hero-main-logo {
     height: 5.4em !important;
     width: auto;
-    margin-bottom: 120px;
+    margin: 0 auto 60px auto;
     display: block;
 }
 
