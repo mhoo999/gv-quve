@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
     color: #191f28;
     background: #ffffff;
@@ -22,7 +22,7 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(180deg, #6B00A3 0%, #4A0072 100%);
+    background: linear-gradient(180deg, #4d1696 0%, #4d1696 100%);
     color: white;
     text-align: center;
     padding: 160px 24px 180px;
@@ -102,7 +102,7 @@ body {
     font-weight: 700;
     letter-spacing: -0.01em;
     line-height: 1.6;
-    color: #FFD74D;
+    color: #fab400;
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: flex-end;
@@ -136,7 +136,7 @@ body {
 .cta-button {
     display: block;
     background: #ffffff;
-    color: #8C00D4;
+    color: #a402f9;
     padding: 16px 36px;
     border-radius: 16px;
     text-decoration: none;
@@ -197,7 +197,7 @@ body {
     justify-content: center;
     gap: 12px;
     margin: 20px 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .countdown-item {
@@ -236,9 +236,9 @@ body {
 .flip-number {
     font-size: 36px;
     font-weight: 700;
-    color: #8C00D4;
+    color: #a402f9;
     line-height: 1;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .countdown-separator {
@@ -497,7 +497,7 @@ body {
 
 .experiment-item.positive {
     border: 1px solid rgba(107, 118, 132, 0.15);
-    background: #FFD74D;
+    background: #fab400;
 }
 
 .experiment-item.positive:hover {
@@ -574,7 +574,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #8C00D4;
+    color: #a402f9;
     text-decoration: none;
     font-size: 15px;
     padding: 12px 24px;
@@ -585,9 +585,9 @@ body {
 }
 
 .research-link a:hover {
-    background: #8C00D4;
+    background: #a402f9;
     color: white;
-    border-color: #8C00D4;
+    border-color: #a402f9;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(140,0,212,0.2);
 }
@@ -611,7 +611,7 @@ body {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #8C00D4 0%, #FFD74D 50%, #8C00D4 100%);
+    background: linear-gradient(90deg, #a402f9 0%, #fab400 50%, #a402f9 100%);
     z-index: 1;
 }
 
@@ -648,7 +648,7 @@ body {
     margin-bottom: 8px;
     letter-spacing: -0.04em;
     line-height: 1.1;
-    background: linear-gradient(135deg, #8C00D4 0%, #6B00A3 100%);
+    background: linear-gradient(135deg, #a402f9 0%, #4d1696 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -708,13 +708,13 @@ body {
 
 .benefit-card.highlight .benefit-badge {
     background: rgba(140,0,212,0.08);
-    color: #8C00D4;
+    color: #a402f9;
 }
 
 .benefit-period {
     font-size: 56px;
     font-weight: 800;
-    color: #8C00D4;
+    color: #a402f9;
     margin-bottom: 12px;
     letter-spacing: -0.04em;
     line-height: 1;
@@ -765,9 +765,9 @@ body {
 .urgency-timer {
     font-size: 36px;
     font-weight: 800;
-    color: #8C00D4;
+    color: #a402f9;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     letter-spacing: -0.02em;
     line-height: 1.2;
 }
@@ -777,7 +777,7 @@ body {
     padding: 22px;
     font-size: 20px;
     margin-bottom: 15px;
-    background: linear-gradient(135deg, #8C00D4 0%, #6B00A3 100%);
+    background: linear-gradient(135deg, #a402f9 0%, #4d1696 100%);
     color: #ffffff;
     font-weight: 700;
     border: none;
@@ -786,7 +786,7 @@ body {
 }
 
 .conversion-cta:hover {
-    background: linear-gradient(135deg, #7A00C0 0%, #5A0080 100%);
+    background: linear-gradient(135deg, #8e02cf 0%, #4d1696 100%);
     color: #ffffff;
     transform: translateY(-3px);
     box-shadow: 0 8px 32px rgba(140, 0, 212, 0.4);
@@ -871,7 +871,7 @@ body {
 
 /* Final CTA */
 .final-cta {
-    background: linear-gradient(180deg, #8C00D4 0%, #7A00C0 100%);
+    background: linear-gradient(180deg, #a402f9 0%, #8e02cf 100%);
     color: white;
     text-align: center;
     padding: 120px 24px;
@@ -924,7 +924,7 @@ body {
 .testimonial-main-title {
     font-size: 28px;
     font-weight: 700;
-    color: #FFD74D;
+    color: #fab400;
     margin-bottom: 12px;
     text-align: center;
     padding: 0 24px;
@@ -1026,7 +1026,7 @@ body {
 
 .testimonial-author {
     font-size: 14px;
-    color: #8C00D4;
+    color: #a402f9;
     font-weight: 600;
     margin-bottom: 16px;
     letter-spacing: -0.01em;
@@ -1035,7 +1035,7 @@ body {
 .testimonial-button {
     width: 100%;
     padding: 12px 24px;
-    background: #FFD74D;
+    background: #fab400;
     color: #191f28;
     border: none;
     border-radius: 12px;
@@ -1047,7 +1047,7 @@ body {
 }
 
 .testimonial-button:hover {
-    background: #FFC933;
+    background: #f5a800;
     transform: translateY(-1px);
 }
 
@@ -1095,7 +1095,7 @@ body {
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
-    border-color: #8C00D4;
+    border-color: #a402f9;
     background: #ffffff;
     box-shadow: 0 0 0 4px rgba(140,0,212,0.08);
 }
@@ -1284,7 +1284,7 @@ body {
     text-align: center;
     box-shadow: 0 24px 64px rgba(0,0,0,0.24);
     animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 3px solid #8C00D4;
+    border: 3px solid #a402f9;
     position: relative;
 }
 
@@ -1340,7 +1340,7 @@ body {
 .modal-content h3 {
     font-size: 28px;
     margin-bottom: 20px;
-    color: #8C00D4;
+    color: #a402f9;
     font-weight: 700;
     letter-spacing: -0.02em;
 }
@@ -1363,7 +1363,7 @@ body {
 .modal-warning strong {
     font-size: 20px;
     font-weight: 700;
-    color: #8C00D4;
+    color: #a402f9;
     display: block;
     margin-top: 8px;
 }
@@ -1388,13 +1388,13 @@ body {
 }
 
 .modal-button.primary {
-    background: linear-gradient(135deg, #8C00D4 0%, #6B00A3 100%);
+    background: linear-gradient(135deg, #a402f9 0%, #4d1696 100%);
     color: white;
     box-shadow: 0 4px 16px rgba(140,0,212,0.3);
 }
 
 .modal-button.primary:hover {
-    background: linear-gradient(135deg, #7A00C0 0%, #5A0080 100%);
+    background: linear-gradient(135deg, #8e02cf 0%, #4d1696 100%);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(140,0,212,0.4);
 }
@@ -1413,13 +1413,13 @@ body {
 }
 
 .modal-button.share {
-    background: #FFD74D;
+    background: #fab400;
     color: #191f28;
     box-shadow: 0 4px 16px rgba(255,215,77,0.3);
 }
 
 .modal-button.share:hover {
-    background: #FFC933;
+    background: #f5a800;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(255,215,77,0.4);
 }
@@ -1437,7 +1437,7 @@ body {
     max-width: 1008px;
     width: calc(100% - 40px);
     height: 100px;
-    background: #FFD74D;
+    background: #fab400;
     backdrop-filter: blur(20px);
     padding: 0 40px;
     box-shadow: 0 8px 32px rgba(255,215,77,0.4);
@@ -1528,9 +1528,9 @@ body {
 .sticky-flip-card span {
     font-size: 18px;
     font-weight: 700;
-    color: #8C00D4;
+    color: #a402f9;
     line-height: 1;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .sticky-timer-label {
@@ -1563,7 +1563,7 @@ body {
 }
 
 .sticky-count strong {
-    color: #8C00D4;
+    color: #a402f9;
     font-weight: 700;
 }
 
@@ -1572,14 +1572,14 @@ body {
     white-space: nowrap;
     flex-shrink: 0;
     font-size: 16px;
-    background: linear-gradient(135deg, #8C00D4 0%, #6B00A3 100%);
+    background: linear-gradient(135deg, #a402f9 0%, #4d1696 100%);
     color: #ffffff;
     box-shadow: 0 4px 16px rgba(140,0,212,0.3);
     font-weight: 700;
 }
 
 .sticky-cta .sticky-cta-button:hover {
-    background: linear-gradient(135deg, #7A00C0 0%, #5A0080 100%);
+    background: linear-gradient(135deg, #8e02cf 0%, #4d1696 100%);
     color: #ffffff;
     box-shadow: 0 6px 20px rgba(140,0,212,0.4);
     transform: translateY(-2px);
@@ -1906,7 +1906,7 @@ body {
         padding: 36px 28px;
         margin: 20px;
         border-radius: 16px;
-        border: 3px solid #8C00D4;
+        border: 3px solid #a402f9;
     }
 
     .modal-content h3 {
@@ -2318,7 +2318,7 @@ body {
         padding: 32px 24px;
         margin: 16px;
         border-radius: 14px;
-        border: 3px solid #8C00D4;
+        border: 3px solid #a402f9;
     }
 
     .modal-close {
