@@ -854,6 +854,7 @@ function initTestimonialSlider() {
     let startX = 0;
     let currentTranslate = 0;
     let prevTranslate = 0;
+    let animationId;
 
     // 현재 transform 값 가져오기
     function getTranslateX() {
@@ -862,57 +863,67 @@ function initTestimonialSlider() {
         return matrix.m41;
     }
 
+    function startDrag(clientX) {
+        isDragging = true;
+        startX = clientX;
+        prevTranslate = getTranslateX();
+
+        // 애니메이션 완전히 제거
+        slider.style.animation = 'none';
+        slider.style.cursor = 'grabbing';
+    }
+
+    function endDrag() {
+        isDragging = false;
+        slider.style.cursor = 'grab';
+
+        // 애니메이션 복원
+        slider.style.animation = 'slide 30s linear infinite';
+    }
+
+    function drag(clientX) {
+        if (!isDragging) return;
+        const currentPosition = clientX;
+        const diff = currentPosition - startX;
+        currentTranslate = prevTranslate + diff;
+        slider.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
     // 마우스 드래그
     slider.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.clientX;
-        slider.style.cursor = 'grabbing';
-        slider.style.animationPlayState = 'paused';
-        prevTranslate = getTranslateX();
+        e.preventDefault();
+        startDrag(e.clientX);
     });
 
     slider.addEventListener('mouseleave', () => {
         if (isDragging) {
-            isDragging = false;
-            slider.style.cursor = 'grab';
-            slider.style.animationPlayState = 'running';
+            endDrag();
         }
     });
 
     slider.addEventListener('mouseup', () => {
-        isDragging = false;
-        slider.style.cursor = 'grab';
-        slider.style.animationPlayState = 'running';
+        if (isDragging) {
+            endDrag();
+        }
     });
 
     slider.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        e.preventDefault();
-        const currentPosition = e.clientX;
-        const diff = currentPosition - startX;
-        currentTranslate = prevTranslate + diff;
-        slider.style.transform = `translateX(${currentTranslate}px)`;
+        drag(e.clientX);
     });
 
     // 터치 드래그 (모바일)
     slider.addEventListener('touchstart', (e) => {
-        isDragging = true;
-        startX = e.touches[0].clientX;
-        slider.style.animationPlayState = 'paused';
-        prevTranslate = getTranslateX();
+        startDrag(e.touches[0].clientX);
     });
 
     slider.addEventListener('touchend', () => {
-        isDragging = false;
-        slider.style.animationPlayState = 'running';
+        if (isDragging) {
+            endDrag();
+        }
     });
 
     slider.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        const currentPosition = e.touches[0].clientX;
-        const diff = currentPosition - startX;
-        currentTranslate = prevTranslate + diff;
-        slider.style.transform = `translateX(${currentTranslate}px)`;
+        drag(e.touches[0].clientX);
     });
 
     // 초기 커서 스타일
