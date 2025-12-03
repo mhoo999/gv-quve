@@ -863,8 +863,8 @@ function initTestimonialSlider() {
     function autoSlide() {
         if (isDragging) return;
 
-        // 1초에 약 50px 정도 이동 (30초에 전체 너비만큼 이동하도록 조정)
-        currentTranslate -= 1.5;
+        // 속도 절반으로 감소 (0.75px씩 이동)
+        currentTranslate -= 0.75;
 
         // 슬라이더 너비의 절반 지점을 넘으면 처음으로 리셋
         const sliderWidth = slider.scrollWidth / 2;
@@ -899,10 +899,8 @@ function initTestimonialSlider() {
         isDragging = false;
         slider.style.cursor = 'grab';
 
-        // 3초 후 자동 슬라이드 재개
-        autoSlideTimeout = setTimeout(() => {
-            animationId = requestAnimationFrame(autoSlide);
-        }, 3000);
+        // 즉시 자동 슬라이드 재개
+        animationId = requestAnimationFrame(autoSlide);
     }
 
     function drag(clientX) {
