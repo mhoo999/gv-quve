@@ -1316,8 +1316,7 @@ body {
     background: white;
     padding: 40px 32px;
     border-radius: 16px;
-    max-width: 440px;
-    max-height: 600px;
+    min-width: 440px;
     margin: 20px;
     text-align: center;
     box-shadow: 0 24px 64px rgba(0,0,0,0.24);
@@ -2174,7 +2173,6 @@ body {
     }
 
     .card-icon {
-        max-width: 100px;
         margin-bottom: 20px;
     }
 
