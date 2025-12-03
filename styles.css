@@ -1317,12 +1317,14 @@ body {
     padding: 40px 32px;
     border-radius: 16px;
     max-width: 440px;
+    max-height: 600px;
     margin: 20px;
     text-align: center;
     box-shadow: 0 24px 64px rgba(0,0,0,0.24);
     animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 3px solid #a402f9;
     position: relative;
+    overflow-y: auto;
 }
 
 .modal-close {
