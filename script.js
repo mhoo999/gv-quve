@@ -343,12 +343,14 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// 자녀 연령 옵션 생성 (24개월~72개월)
+// 자녀 연령 옵션 생성 (2024년생~2018년생)
 const childAgeSelect = document.getElementById('childAge');
-for (let i = 24; i <= 72; i++) {
+const currentYear = 2025;
+for (let birthYear = 2024; birthYear >= 2018; birthYear--) {
+    const age = currentYear - birthYear;
     const option = document.createElement('option');
-    option.value = i;
-    option.textContent = `${i}개월`;
+    option.value = birthYear;
+    option.textContent = `${birthYear}년생(${age}세)`;
     childAgeSelect.appendChild(option);
 }
 
@@ -864,7 +866,7 @@ function initTestimonialSlider() {
         if (isDragging) return;
 
         // 속도 절반으로 감소 (0.75px씩 이동)
-        currentTranslate -= 0.75;
+        currentTranslate -= 0.25;
 
         // 슬라이더 너비의 절반 지점을 넘으면 처음으로 리셋
         const sliderWidth = slider.scrollWidth / 2;
