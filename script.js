@@ -335,8 +335,12 @@ window.addEventListener('scroll', () => {
     const isCtaVisible = scrollTop + window.innerHeight > ctaSectionTop &&
                          scrollTop < ctaSectionBottom;
 
-    // bg-gray 섹션이 보이고, CTA 섹션이 화면에 보이지 않을 때만 표시
-    if (isBgGrayVisible && !isCtaVisible) {
+    // CTA 섹션 아래로 스크롤했는지 확인
+    const isBelowCta = scrollTop >= ctaSectionBottom;
+
+    // bg-gray 섹션이 보이고, CTA 섹션이 화면에 보이지 않거나 그 위에 있을 때만 표시
+    // (CTA 섹션 아래로 스크롤하면 숨김)
+    if (isBgGrayVisible && !isCtaVisible && !isBelowCta) {
         stickyCta.classList.add('visible');
     } else {
         stickyCta.classList.remove('visible');
