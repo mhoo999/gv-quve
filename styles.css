@@ -119,6 +119,13 @@ body {
     margin: 0 4px;
 }
 
+.hero-main-logo {
+    height: 5.4em !important;
+    width: auto;
+    margin-bottom: 120px;
+    display: block;
+}
+
 .hero .launch-date {
     font-size: 16px;
     margin-bottom: 40px;
