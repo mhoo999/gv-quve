@@ -423,7 +423,6 @@ body {
     display: block;
     transition: transform 0.3s ease;
     width: 100%;
-    max-width: 120px;
     height: auto;
     margin-left: auto;
     margin-right: auto;
@@ -611,7 +610,7 @@ body {
 
 .experiment-item p {
     font-size: 15px;
-    color: #6b7684;
+    color: #000000;
     line-height: 1.7;
 }
 
@@ -999,6 +998,10 @@ body {
     gap: 24px;
     padding: 0 24px;
     will-change: transform;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 /* 호버 시 애니메이션 일시정지 */
@@ -1021,7 +1024,7 @@ body {
 .testimonial-card {
     flex-shrink: 0;
     width: 290px;
-    height: 478px;
+    min-height: 430px;
     background: #ffffff;
     border-radius: 20px;
     padding: 24px;
@@ -1076,35 +1079,11 @@ body {
 
 .testimonial-author {
     font-size: 14px;
-    color: #a402f9;
+    color: #000000;
     font-weight: 600;
     margin-bottom: 16px;
     letter-spacing: -0.01em;
 }
-
-.testimonial-button {
-    width: 100%;
-    padding: 12px 24px;
-    background: #fab400;
-    color: #191f28;
-    border: none;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
-    letter-spacing: -0.01em;
-}
-
-.testimonial-button:hover {
-    background: #f5a800;
-    transform: translateY(-1px);
-}
-
-.testimonial-button:active {
-    transform: translateY(0);
-}
-
 
 .form-container {
     max-width: 520px;
@@ -1920,7 +1899,7 @@ body {
 
     .testimonial-card {
         width: 270px;
-        height: 450px;
+        min-height: 410px;
         padding: 22px;
     }
 
@@ -2510,7 +2489,7 @@ body {
 
     .testimonial-card {
         width: 260px;
-        height: 430px;
+        min-height: 390px;
         padding: 20px;
     }
 
@@ -2533,11 +2512,6 @@ body {
     .testimonial-author {
         font-size: 13px;
         margin-bottom: 12px;
-    }
-
-    .testimonial-button {
-        padding: 11px 20px;
-        font-size: 13px;
     }
 
     /* Research Link */

@@ -813,17 +813,10 @@ function createTestimonialCard(testimonial) {
     author.className = 'testimonial-author';
     author.textContent = testimonial.author;
 
-    const button = document.createElement('button');
-    button.className = 'testimonial-button';
-    button.setAttribute('data-testimonial-id', testimonial.id);
-    button.setAttribute('data-page-url', testimonial.pageUrl || '');
-    button.textContent = '자세히 보기';
-
     card.appendChild(title);
     card.appendChild(imageDiv);
     card.appendChild(content);
     card.appendChild(author);
-    card.appendChild(button);
 
     return card;
 }
@@ -855,22 +848,63 @@ function initTestimonialSlider() {
         const card = createTestimonialCard(testimonial);
         slider.appendChild(card);
     });
-    
-    // 후기 버튼 이벤트 리스너 추가
-    slider.querySelectorAll('.testimonial-button').forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const testimonialId = button.getAttribute('data-testimonial-id');
-            const pageUrl = button.getAttribute('data-page-url');
-            
-            // pageUrl이 있으면 해당 URL로, 없으면 기본 후기 페이지로
-            if (pageUrl) {
-                goToTestimonialPage(testimonialId, pageUrl);
-            } else {
-                goToTestimonialPage(testimonialId);
-            }
-        });
+
+    // 드래그 기능 추가
+    let isDragging = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    // 마우스 드래그
+    slider.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        slider.style.cursor = 'grabbing';
+        slider.style.animationPlayState = 'paused';
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
     });
+
+    slider.addEventListener('mouseleave', () => {
+        isDragging = false;
+        slider.style.cursor = 'grab';
+        slider.style.animationPlayState = 'running';
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDragging = false;
+        slider.style.cursor = 'grab';
+        slider.style.animationPlayState = 'running';
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.style.transform = `translateX(${-scrollLeft + walk}px)`;
+    });
+
+    // 터치 드래그 (모바일)
+    slider.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        slider.style.animationPlayState = 'paused';
+        startX = e.touches[0].pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('touchend', () => {
+        isDragging = false;
+        slider.style.animationPlayState = 'running';
+    });
+
+    slider.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const x = e.touches[0].pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.style.transform = `translateX(${-scrollLeft + walk}px)`;
+    });
+
+    // 초기 커서 스타일
+    slider.style.cursor = 'grab';
 }
 
 // ============================================
