@@ -1449,6 +1449,26 @@ body {
     background: #e8ecef;
 }
 
+/* Exit Modal 전용 레이아웃 */
+#exitModal .modal-buttons {
+    flex-direction: column;
+    gap: 8px;
+}
+
+#exitModal .modal-button.secondary {
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    background: transparent;
+    color: #9ca3af;
+}
+
+#exitModal .modal-button.secondary:hover {
+    background: transparent;
+    color: #6b7280;
+    transform: none;
+}
+
 .modal-button.share {
     background: #fab400;
     color: #191f28;
