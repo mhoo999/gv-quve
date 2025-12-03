@@ -1462,6 +1462,12 @@ body {
     gap: 8px;
 }
 
+/* Success Modal 전용 레이아웃 */
+#successModal .modal-buttons {
+    flex-direction: column;
+    gap: 8px;
+}
+
 #exitModal .modal-button.secondary {
     padding: 12px 20px;
     font-size: 14px;
