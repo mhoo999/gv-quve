@@ -849,27 +849,49 @@ function initTestimonialSlider() {
         slider.appendChild(card);
     });
 
-    // 드래그 기능 추가
+    // 드래그 및 자동 슬라이드 기능
     let isDragging = false;
     let startX = 0;
     let currentTranslate = 0;
-    let prevTranslate = 0;
-    let animationId;
+    let animationId = null;
+    let autoSlideTimeout = null;
 
-    // 현재 transform 값 가져오기
-    function getTranslateX() {
-        const style = window.getComputedStyle(slider);
-        const matrix = new DOMMatrixReadOnly(style.transform);
-        return matrix.m41;
+    // CSS 애니메이션 제거하고 JavaScript로 제어
+    slider.style.animation = 'none';
+
+    // 자동 슬라이드 애니메이션 (requestAnimationFrame 사용)
+    function autoSlide() {
+        if (isDragging) return;
+
+        // 1초에 약 50px 정도 이동 (30초에 전체 너비만큼 이동하도록 조정)
+        currentTranslate -= 1.5;
+
+        // 슬라이더 너비의 절반 지점을 넘으면 처음으로 리셋
+        const sliderWidth = slider.scrollWidth / 2;
+        if (Math.abs(currentTranslate) >= sliderWidth) {
+            currentTranslate = 0;
+        }
+
+        slider.style.transform = `translateX(${currentTranslate}px)`;
+        animationId = requestAnimationFrame(autoSlide);
     }
 
     function startDrag(clientX) {
         isDragging = true;
         startX = clientX;
-        prevTranslate = getTranslateX();
 
-        // 애니메이션 완전히 제거
-        slider.style.animation = 'none';
+        // 자동 슬라이드 중지
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+
+        // 자동 재개 타이머 취소
+        if (autoSlideTimeout) {
+            clearTimeout(autoSlideTimeout);
+            autoSlideTimeout = null;
+        }
+
         slider.style.cursor = 'grabbing';
     }
 
@@ -877,15 +899,18 @@ function initTestimonialSlider() {
         isDragging = false;
         slider.style.cursor = 'grab';
 
-        // 애니메이션 복원
-        slider.style.animation = 'slide 30s linear infinite';
+        // 3초 후 자동 슬라이드 재개
+        autoSlideTimeout = setTimeout(() => {
+            animationId = requestAnimationFrame(autoSlide);
+        }, 3000);
     }
 
     function drag(clientX) {
         if (!isDragging) return;
         const currentPosition = clientX;
         const diff = currentPosition - startX;
-        currentTranslate = prevTranslate + diff;
+        currentTranslate += diff;
+        startX = currentPosition;
         slider.style.transform = `translateX(${currentTranslate}px)`;
     }
 
@@ -926,8 +951,12 @@ function initTestimonialSlider() {
         drag(e.touches[0].clientX);
     });
 
-    // 초기 커서 스타일
+    // 초기 설정
     slider.style.cursor = 'grab';
+    currentTranslate = 0;
+
+    // 자동 슬라이드 시작
+    animationId = requestAnimationFrame(autoSlide);
 }
 
 // ============================================
