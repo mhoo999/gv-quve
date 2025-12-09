@@ -977,8 +977,8 @@ body {
 }
 
 .benefit-card.highlight .benefit-badge {
-    background: rgba(140,0,212,0.08);
-    color: #a402f9;
+    background: #F7B203;
+    color: #ffffff;
 }
 
 .benefit-period {
@@ -1006,6 +1006,14 @@ body {
     margin-bottom: 12px;
     letter-spacing: -0.01em;
     line-height: 1.4;
+}
+
+.benefit-image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin: 20px auto;
+    display: block;
 }
 
 .benefit-detail {
