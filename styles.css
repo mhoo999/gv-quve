@@ -125,6 +125,14 @@ body {
     flex-wrap: wrap;
 }
 
+.hero-logo {
+    height: 336px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 32px;
+}
+
 .logo-inline {
     height: 1.8em;
     width: auto;
@@ -1728,7 +1736,7 @@ body {
 
     /* Hero Section */
     .hero {
-        padding: 100px 24px 120px;
+        padding: 0px 24px 0px;
     }
 
     .hero h1 {
