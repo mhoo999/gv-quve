@@ -845,6 +845,8 @@ body {
 /* Conversion Section */
 .conversion-box {
     width: 100%;
+    max-width: 966px;
+    margin: 0 auto;
     background: #ffffff;
     padding: 64px 56px;
     border-radius: 32px;
