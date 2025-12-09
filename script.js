@@ -1102,7 +1102,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 예약자 수 초기화
     initReservationCount();
+
+    // Experience 버튼 이벤트 초기화
+    initExperienceButton();
 });
+
+// Experience 버튼 초기화
+function initExperienceButton() {
+    const experienceButton = document.querySelector('.experience-button');
+    const experienceImage = document.querySelector('.experience-image');
+    
+    if (!experienceButton || !experienceImage) return;
+
+    let micPermissionGranted = false;
+    let experienceStarted = false;
+
+    experienceButton.addEventListener('click', async () => {
+        if (experienceStarted) {
+            // 이미 체험 시작된 경우
+            return;
+        }
+
+        if (!micPermissionGranted) {
+            // 마이크 권한 요청
+            experienceButton.style.display = 'none';
+            experienceImage.src = 'images/experience_web_mic.png';
+
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                // 마이크 허용 성공
+                micPermissionGranted = true;
+                experienceImage.src = 'images/experience_web_mic_success.png';
+                experienceButton.textContent = '체험 시작하기';
+                experienceButton.innerHTML = '<img src="images/reproduction.png" alt="" class="experience-button-icon" />체험 시작하기';
+                experienceButton.style.display = 'flex';
+                
+                // 스트림 정리
+                stream.getTracks().forEach(track => track.stop());
+            } catch (error) {
+                // 마이크 허용 거부
+                experienceImage.src = 'images/experience_web_mic_fail.png';
+                experienceButton.textContent = '체험 시작하기';
+                experienceButton.innerHTML = '<img src="images/reproduction.png" alt="" class="experience-button-icon" />체험 시작하기';
+                experienceButton.style.display = 'flex';
+            }
+        } else {
+            // 체험 시작하기 버튼 클릭
+            experienceStarted = true;
+            experienceImage.src = 'images/experience_web_frame.png';
+            experienceButton.style.display = 'none';
+        }
+    });
+}
 
 // 모달 외부 클릭시 닫기
 window.onclick = function(event) {
