@@ -1114,6 +1114,10 @@ function initExperienceButton() {
     
     if (!experienceButton || !experienceImage) return;
 
+    // 모바일 감지
+    const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const imagePrefix = isMobile ? 'experience_mo' : 'experience_web';
+
     let micPermissionGranted = false;
     let micPermissionRequested = false;
     let experienceStarted = false;
@@ -1141,13 +1145,13 @@ function initExperienceButton() {
             // 첫 클릭: 마이크 권한 요청
             micPermissionRequested = true;
             experienceButton.style.display = 'none';
-            experienceImage.src = 'images/experience_web_mic.png';
+            experienceImage.src = `images/${imagePrefix}_mic.png`;
 
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                 // 마이크 허용 성공
                 micPermissionGranted = true;
-                experienceImage.src = 'images/experience_web_mic_success.png';
+                experienceImage.src = `images/${imagePrefix}_mic_success.png`;
                 experienceButton.textContent = '체험 시작하기';
                 experienceButton.innerHTML = '<img src="images/reproduction.png" alt="" class="experience-button-icon" />체험 시작하기';
                 experienceButton.style.display = 'flex';
@@ -1156,7 +1160,7 @@ function initExperienceButton() {
                 stream.getTracks().forEach(track => track.stop());
             } catch (error) {
                 // 마이크 허용 거부 또는 마이크 없음
-                experienceImage.src = 'images/experience_web_mic_fail.png';
+                experienceImage.src = `images/${imagePrefix}_mic_fail.png`;
                 experienceButton.textContent = '아이 반응 영상 보기';
                 experienceButton.innerHTML = '<img src="images/reproduction.png" alt="" class="experience-button-icon" />아이 반응 영상 보기';
                 experienceButton.style.display = 'flex';
@@ -1164,12 +1168,12 @@ function initExperienceButton() {
         } else if (micPermissionGranted) {
             // 체험 시작하기 버튼 클릭 (마이크 허용된 경우)
             experienceStarted = true;
-            experienceImage.src = 'images/experience_web_frame.png';
+            experienceImage.src = `images/${imagePrefix}_frame.png`;
             experienceButton.style.display = 'none';
         } else {
             // 아이 반응 영상 보기 버튼 클릭 (마이크 거부된 경우)
             isWatchingVideo = true;
-            experienceImage.src = 'images/experience_web_frame.png';
+            experienceImage.src = `images/${imagePrefix}_frame.png`;
             experienceButton.style.display = 'none';
             
             // 영상 시뮬레이션: 이미지가 로드된 후 일정 시간 후 자동 전환
@@ -1178,7 +1182,7 @@ function initExperienceButton() {
                 setTimeout(() => {
                     videoWatched = true;
                     isWatchingVideo = false;
-                    experienceImage.src = 'images/experience_web_apply.png';
+                    experienceImage.src = `images/${imagePrefix}_apply.png`;
                     experienceButton.textContent = '사전 무료체험 신청하기';
                     experienceButton.innerHTML = '<img src="images/reproduction.png" alt="" class="experience-button-icon" />사전 무료체험 신청하기';
                     experienceButton.style.display = 'flex';
