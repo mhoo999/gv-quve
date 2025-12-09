@@ -1027,6 +1027,12 @@ body {
     max-width: 300px;
     height: auto;
     display: block;
+    margin: 20px auto;
+}
+
+.benefit-card.highlight .benefit-image {
+    margin: 20px auto;
+    display: block;
 }
 
 .benefit-card.gift-card .benefit-image {
