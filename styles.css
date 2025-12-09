@@ -1020,6 +1020,11 @@ body {
     display: block;
 }
 
+.benefit-card.gift-card .benefit-image {
+    min-height: 200px;
+    object-fit: contain;
+}
+
 .benefit-detail {
     font-size: 14px;
     color: #6b7684;
