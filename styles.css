@@ -980,6 +980,11 @@ body {
     color: #ffffff;
 }
 
+.benefit-card.gift-card .benefit-badge {
+    background: #FF3BE2;
+    color: #ffffff;
+}
+
 .benefit-period {
     font-size: 56px;
     font-weight: 800;
