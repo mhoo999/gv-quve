@@ -98,7 +98,7 @@ body {
     font-size: 48px;
     font-weight: 800;
     font-style: normal;
-    margin-bottom: 24px;
+    margin-bottom: 4px;
     line-height: 60px;
     letter-spacing: -0.02em;
     text-align: center;
@@ -138,6 +138,7 @@ body {
     justify-content: center;
     gap: 4px;
     flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .hero-logo {
@@ -146,6 +147,7 @@ body {
     display: block;
     margin: 0 auto;
     margin-bottom: 32px;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .logo-inline {
