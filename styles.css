@@ -572,6 +572,7 @@ body {
 .bg-image-conversion .container {
     position: relative;
     z-index: 1;
+    text-align: center;
 }
 
 /* Problem Section */
@@ -853,6 +854,12 @@ body {
     overflow: hidden;
 }
 
+.bg-image-conversion .container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
 .conversion-title {
     height: 50px;
     border-radius: 25px;
@@ -880,7 +887,7 @@ body {
     line-height: 50px;
     letter-spacing: -0.02em;
     text-align: center;
-    color: #191f28;
+    color: #ffffff;
     margin: 0 auto 56px;
 }
 
