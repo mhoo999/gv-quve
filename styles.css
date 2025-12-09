@@ -1123,6 +1123,27 @@ body {
 .faq-list {
     max-width: 800px;
     margin: 0 auto;
+    margin-bottom: 60px;
+}
+
+.notice-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.notice-content p {
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+    color: #191f28;
+    margin-bottom: 16px;
+}
+
+.notice-content p:last-child {
+    margin-bottom: 0;
 }
 
 .faq-item {
