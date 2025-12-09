@@ -1117,6 +1117,9 @@ function initExperienceButton() {
     // 모바일 감지
     const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const imagePrefix = isMobile ? 'experience_mo' : 'experience_web';
+    
+    // 초기 이미지 설정
+    experienceImage.src = `images/${imagePrefix}_img.png`;
 
     let micPermissionGranted = false;
     let micPermissionRequested = false;
