@@ -174,7 +174,6 @@ body {
     letter-spacing: -0.02em;
     text-align: center;
     margin-bottom: 20px;
-    opacity: 0.9;
     color: white;
 }
 
@@ -281,7 +280,14 @@ body {
 /* Stats Section */
 .stats-section {
     padding: 60px 24px;
-    background: #ffffff;
+    background-image: url('images/hero_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .stats-section .container {
@@ -313,6 +319,7 @@ body {
 
 .countdown p {
     margin-bottom: 12px;
+    color: white;
 }
 
 .countdown-timer {
@@ -379,6 +386,7 @@ body {
 .social-proof {
     font-size: 15px;
     opacity: 0.95;
+    color: white;
 }
 
 /* Section Styles */
