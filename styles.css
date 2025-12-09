@@ -28,7 +28,7 @@ body {
     background-repeat: no-repeat;
     color: white;
     text-align: center;
-    padding: 160px 24px 180px;
+    padding: 54px 24px 180px;
     position: relative;
     overflow: hidden;
 }
@@ -50,6 +50,22 @@ body {
     z-index: 1;
     max-width: 800px;
     margin: 0 auto;
+}
+
+.hero-bottom-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    z-index: 2;
 }
 
 .video-placeholder {
@@ -83,7 +99,6 @@ body {
     font-size: 48px;
     font-weight: 800;
     font-style: normal;
-    margin-top: 54px;
     margin-bottom: 24px;
     line-height: 60px;
     letter-spacing: -0.02em;
@@ -150,9 +165,14 @@ body {
 
 .hero .launch-date {
     font-size: 16px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     font-weight: 500;
-    opacity: 0.85;
+    opacity: 0.9;
+    color: white;
+}
+
+.hero-bottom-overlay .launch-date {
+    margin-bottom: 16px;
 }
 
 /* Hero CTA Buttons Container */
@@ -163,6 +183,11 @@ body {
     align-items: center;
     flex-wrap: wrap;
     margin: 0 auto;
+    max-width: 600px;
+}
+
+.hero-bottom-overlay .hero-cta-buttons {
+    width: 100%;
     max-width: 600px;
 }
 
