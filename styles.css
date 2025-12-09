@@ -91,6 +91,10 @@ body {
     animation: fadeInUp 0.8s ease-out;
 }
 
+.hero h1 .highlight-cube {
+    color: #F4EA29;
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
