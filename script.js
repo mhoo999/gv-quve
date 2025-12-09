@@ -1115,16 +1115,31 @@ function initExperienceButton() {
     if (!experienceButton || !experienceImage) return;
 
     let micPermissionGranted = false;
+    let micPermissionRequested = false;
     let experienceStarted = false;
+    let videoWatched = false;
+    let isWatchingVideo = false;
 
     experienceButton.addEventListener('click', async () => {
+        if (isWatchingVideo) {
+            // 영상 시청 중에는 클릭 무시
+            return;
+        }
+
+        if (videoWatched) {
+            // 영상 시청 후 사전 무료체험 신청하기 버튼 클릭
+            // TODO: 사전 무료체험 신청 로직 구현
+            return;
+        }
+
         if (experienceStarted) {
             // 이미 체험 시작된 경우
             return;
         }
 
-        if (!micPermissionGranted) {
-            // 마이크 권한 요청
+        if (!micPermissionRequested) {
+            // 첫 클릭: 마이크 권한 요청
+            micPermissionRequested = true;
             experienceButton.style.display = 'none';
             experienceImage.src = 'images/experience_web_mic.png';
 
@@ -1140,17 +1155,42 @@ function initExperienceButton() {
                 // 스트림 정리
                 stream.getTracks().forEach(track => track.stop());
             } catch (error) {
-                // 마이크 허용 거부
+                // 마이크 허용 거부 또는 마이크 없음
                 experienceImage.src = 'images/experience_web_mic_fail.png';
-                experienceButton.textContent = '체험 시작하기';
-                experienceButton.innerHTML = '<img src="images/reproduction.png" alt="" class="experience-button-icon" />체험 시작하기';
+                experienceButton.textContent = '아이 반응 영상 보기';
+                experienceButton.innerHTML = '<img src="images/reproduction.png" alt="" class="experience-button-icon" />아이 반응 영상 보기';
                 experienceButton.style.display = 'flex';
             }
-        } else {
-            // 체험 시작하기 버튼 클릭
+        } else if (micPermissionGranted) {
+            // 체험 시작하기 버튼 클릭 (마이크 허용된 경우)
             experienceStarted = true;
             experienceImage.src = 'images/experience_web_frame.png';
             experienceButton.style.display = 'none';
+        } else {
+            // 아이 반응 영상 보기 버튼 클릭 (마이크 거부된 경우)
+            isWatchingVideo = true;
+            experienceImage.src = 'images/experience_web_frame.png';
+            experienceButton.style.display = 'none';
+            
+            // 영상 시뮬레이션: 이미지가 로드된 후 일정 시간 후 자동 전환
+            const handleImageLoad = function() {
+                // 영상 길이를 30초로 가정 (실제 영상 길이에 맞게 조정)
+                setTimeout(() => {
+                    videoWatched = true;
+                    isWatchingVideo = false;
+                    experienceImage.src = 'images/experience_web_apply.png';
+                    experienceButton.textContent = '사전 무료체험 신청하기';
+                    experienceButton.innerHTML = '<img src="images/reproduction.png" alt="" class="experience-button-icon" />사전 무료체험 신청하기';
+                    experienceButton.style.display = 'flex';
+                    experienceImage.removeEventListener('load', handleImageLoad);
+                }, 30000); // 30초 후 자동 전환
+            };
+            
+            if (experienceImage.complete) {
+                handleImageLoad();
+            } else {
+                experienceImage.addEventListener('load', handleImageLoad);
+            }
         }
     });
 }
