@@ -103,7 +103,7 @@ body {
     letter-spacing: -0.02em;
     text-align: center;
     animation: fadeInUp 0.8s ease-out;
-    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.3);
+    text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.302);
 }
 
 .hero h1 .highlight-cube {
@@ -132,8 +132,7 @@ body {
     letter-spacing: -0.02em;
     text-align: center;
     color: #ffffff;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.3);
+    text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.302);
     display: flex;
     align-items: flex-end;
     justify-content: center;
