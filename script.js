@@ -354,28 +354,29 @@ async function initReservationCount() {
 
 // Sticky CTA 표시/숨김
 let lastScrollTop = 0;
+
+// 페이지 로드 시 스티키 CTA 표시
+window.addEventListener('DOMContentLoaded', () => {
+    const stickyCta = document.getElementById('stickyCta');
+    if (stickyCta) {
+        stickyCta.classList.add('visible');
+    }
+});
+
 window.addEventListener('scroll', () => {
     const stickyCta = document.getElementById('stickyCta');
     const ctaSection = document.getElementById('ctaSection');
-    const bgGraySection = document.querySelector('.bg-gray.bg-image');
 
     // 필수 요소 존재 여부 확인
-    if (!stickyCta || !ctaSection || !bgGraySection) {
+    if (!stickyCta || !ctaSection) {
         return;
     }
 
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    // bg-gray bg-image 섹션 위치 계산
-    const bgGraySectionTop = bgGraySection.offsetTop;
-
     // CTA 섹션 위치 계산
     const ctaSectionTop = ctaSection.offsetTop;
     const ctaSectionBottom = ctaSectionTop + ctaSection.offsetHeight;
-
-    // bg-gray bg-image 섹션이 화면에 보이기 시작할 때부터 표시
-    // (섹션의 상단이 화면 하단에 도달했을 때)
-    const isBgGrayVisible = scrollTop + window.innerHeight >= bgGraySectionTop;
 
     // CTA 섹션이 화면 안에 있는지 확인
     const isCtaVisible = scrollTop + window.innerHeight > ctaSectionTop &&
@@ -384,9 +385,8 @@ window.addEventListener('scroll', () => {
     // CTA 섹션 아래로 스크롤했는지 확인
     const isBelowCta = scrollTop >= ctaSectionBottom;
 
-    // bg-gray 섹션이 보이고, CTA 섹션이 화면에 보이지 않거나 그 위에 있을 때만 표시
-    // (CTA 섹션 아래로 스크롤하면 숨김)
-    if (isBgGrayVisible && !isCtaVisible && !isBelowCta) {
+    // CTA 섹션이 화면에 보이지 않을 때만 표시 (위 또는 아래로 벗어났을 때 숨김)
+    if (!isCtaVisible && !isBelowCta) {
         stickyCta.classList.add('visible');
     } else {
         stickyCta.classList.remove('visible');
