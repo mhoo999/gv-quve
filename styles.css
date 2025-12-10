@@ -1719,6 +1719,15 @@ body {
     }
 }
 
+@keyframes slideUpFromBottom {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
 .modal-content h3 {
     font-size: 28px;
     margin-bottom: 20px;
@@ -2442,16 +2451,27 @@ body {
         gap: 10px;
     }
 
-    /* Modal */
+    /* Modal - 바텀시트 스타일 */
+    .modal {
+        align-items: flex-end;
+    }
+
     .modal-content {
-        padding: 36px 28px;
-        margin: 20px;
-        border-radius: 16px;
-        border: 3px solid #a402f9;
+        padding: 28px 24px 32px;
+        margin: 0;
+        border-radius: 20px 20px 0 0;
+        border: none;
+        border-top: 3px solid #a402f9;
+        width: 100%;
+        max-width: 100%;
+        min-width: auto;
+        max-height: 90vh;
+        animation: slideUpFromBottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .modal-content h3 {
-        font-size: 26px;
+        font-size: 22px;
+        text-align: left;
     }
 
     .modal-buttons {
@@ -2460,7 +2480,7 @@ body {
 
     .modal-button {
         width: 100%;
-        padding: 18px 24px;
+        padding: 16px 24px;
         font-size: 16px;
     }
 
