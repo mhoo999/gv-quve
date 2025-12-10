@@ -600,6 +600,9 @@ function collectFormData() {
     };
 }
 
+// 임시 폼 데이터 저장
+let tempFormData = null;
+
 /**
  * 폼 제출 처리
  */
@@ -608,8 +611,8 @@ async function handleFormSubmit(e) {
 
     const formData = collectFormData();
 
-    // 기본 필수 항목 검사
-    if (!formData.name || !formData.phone || !formData.childAge || !formData.agree) {
+    // 기본 필수 항목 검사 (agree 제외)
+    if (!formData.name || !formData.phone || !formData.childAge) {
         alert('모든 필수 항목을 입력해주세요.');
         return;
     }
@@ -628,75 +631,9 @@ async function handleFormSubmit(e) {
         return;
     }
 
-    // 로딩 상태 표시 (선택사항)
-    const submitButton = e.target.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.textContent;
-    submitButton.disabled = true;
-    submitButton.textContent = '처리 중...';
-
-    try {
-        // API_CONFIG.RESERVATION_ENDPOINT가 설정되어 있으면 백엔드로 전송
-        if (API_CONFIG.RESERVATION_ENDPOINT) {
-            const response = await submitReservation(formData);
-            console.log('예약 성공:', response);
-
-            // ============================================
-            // 중복 예약 체크 (백엔드 개발자 가이드)
-            // ============================================
-            // 백엔드에서 duplicate 또는 isDuplicate 플래그를 true로 반환하면 중복 모달 표시
-            //
-            // 예시 응답 1 - 중복 예약인 경우:
-            // {
-            //     "duplicate": true,
-            //     "message": "이미 예약된 번호입니다"
-            // }
-            //
-            // 예시 응답 2 - 중복 예약인 경우 (다른 키 사용):
-            // {
-            //     "isDuplicate": true,
-            //     "message": "이미 예약된 번호입니다"
-            // }
-            //
-            // 예시 응답 3 - 정상 예약인 경우:
-            // {
-            //     "duplicate": false,
-            //     "totalReservations": 1234,
-            //     "message": "예약이 완료되었습니다"
-            // }
-            // ============================================
-            if (response.duplicate || response.isDuplicate) {
-                document.getElementById('duplicateModal').classList.add('show');
-                return;
-            }
-
-            // 성공 모달 표시
-            document.getElementById('successName').textContent = formData.name;
-            document.getElementById('successModal').classList.add('show');
-
-            // 예약자 수 업데이트 (백엔드 응답에 포함된 경우)
-            if (response.totalReservations) {
-                updateReservationCount(response.totalReservations);
-            }
-        } else {
-            // API 엔드포인트가 없으면 데모 모드
-            console.log('예약 정보 (데모 모드):', formData);
-            
-            // 성공 모달 표시
-            document.getElementById('successName').textContent = formData.name;
-            document.getElementById('successModal').classList.add('show');
-
-            // 예약자 수 증가 (데모용)
-            const currentCount = parseInt(document.getElementById('heroReservationCount').textContent);
-            updateReservationCount(currentCount + 1);
-        }
-    } catch (error) {
-        console.error('예약 처리 중 오류 발생:', error);
-        alert('예약 처리 중 오류가 발생했습니다. 다시 시도해주세요.');
-    } finally {
-        // 로딩 상태 해제
-        submitButton.disabled = false;
-        submitButton.textContent = originalButtonText;
-    }
+    // 폼 데이터 임시 저장 및 동의 모달 표시
+    tempFormData = formData;
+    document.getElementById('consentModal').classList.add('show');
 }
 
 // 폼 제출 이벤트 리스너
@@ -1267,5 +1204,133 @@ function initExperienceButton() {
 window.onclick = function(event) {
     if (event.target.classList.contains('modal')) {
         event.target.classList.remove('show');
+    }
+}
+
+// ============================================
+// 동의 모달 관련 함수
+// ============================================
+
+/**
+ * 동의 모달 닫기
+ */
+function closeConsentModal() {
+    document.getElementById('consentModal').classList.remove('show');
+    // 체크박스 초기화
+    document.getElementById('consentAll').checked = false;
+    document.getElementById('consentRequired').checked = false;
+    document.getElementById('consentOptional').checked = false;
+}
+
+/**
+ * 상세 내용 토글
+ */
+function toggleConsentDetail(type) {
+    const detail = document.getElementById(`consentDetail${type.charAt(0).toUpperCase() + type.slice(1)}`);
+    const button = event.target;
+
+    if (detail.classList.contains('active')) {
+        detail.classList.remove('active');
+        button.classList.remove('active');
+    } else {
+        detail.classList.add('active');
+        button.classList.add('active');
+    }
+}
+
+/**
+ * 전체 동의 체크박스 이벤트
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    const consentAll = document.getElementById('consentAll');
+    const consentRequired = document.getElementById('consentRequired');
+    const consentOptional = document.getElementById('consentOptional');
+
+    if (consentAll) {
+        consentAll.addEventListener('change', () => {
+            consentRequired.checked = consentAll.checked;
+            consentOptional.checked = consentAll.checked;
+        });
+    }
+
+    // 개별 체크박스 변경 시 전체 동의 체크박스 상태 업데이트
+    if (consentRequired && consentOptional) {
+        [consentRequired, consentOptional].forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                if (consentRequired.checked && consentOptional.checked) {
+                    consentAll.checked = true;
+                } else {
+                    consentAll.checked = false;
+                }
+            });
+        });
+    }
+});
+
+/**
+ * 동의 완료 및 예약 제출
+ */
+async function submitConsent() {
+    const consentRequired = document.getElementById('consentRequired');
+
+    // 필수 동의 확인
+    if (!consentRequired.checked) {
+        alert('필수 동의 항목에 동의해주세요.');
+        return;
+    }
+
+    if (!tempFormData) {
+        alert('폼 데이터가 없습니다. 다시 시도해주세요.');
+        closeConsentModal();
+        return;
+    }
+
+    // 동의 정보 추가
+    tempFormData.agree = true;
+    tempFormData.marketingConsent = document.getElementById('consentOptional').checked;
+
+    // 동의 모달 닫기
+    document.getElementById('consentModal').classList.remove('show');
+
+    try {
+        // API_CONFIG.RESERVATION_ENDPOINT가 설정되어 있으면 백엔드로 전송
+        if (API_CONFIG.RESERVATION_ENDPOINT) {
+            const response = await submitReservation(tempFormData);
+            console.log('예약 성공:', response);
+
+            // 중복 예약 체크
+            if (response.duplicate || response.isDuplicate) {
+                document.getElementById('duplicateModal').classList.add('show');
+                return;
+            }
+
+            // 성공 모달 표시
+            document.getElementById('successName').textContent = tempFormData.name;
+            document.getElementById('successModal').classList.add('show');
+
+            // 예약자 수 업데이트 (백엔드 응답에 포함된 경우)
+            if (response.totalReservations) {
+                updateReservationCount(response.totalReservations);
+            }
+        } else {
+            // API 엔드포인트가 없으면 데모 모드
+            console.log('예약 정보 (데모 모드):', tempFormData);
+
+            // 성공 모달 표시
+            document.getElementById('successName').textContent = tempFormData.name;
+            document.getElementById('successModal').classList.add('show');
+
+            // 예약자 수 증가 (데모용)
+            const currentCount = parseInt(document.getElementById('heroReservationCount').textContent.replace(/,/g, ''));
+            updateReservationCount(currentCount + 1);
+        }
+
+        // 폼 초기화
+        document.getElementById('reservationForm').reset();
+        tempFormData = null;
+
+    } catch (error) {
+        console.error('예약 처리 중 오류 발생:', error);
+        alert('예약 처리 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
 }

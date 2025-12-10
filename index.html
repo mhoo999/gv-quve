@@ -234,8 +234,8 @@
                         </select>
                     </div>
 
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="agree" name="agree" required>
+                    <div class="checkbox-group" style="display: none;">
+                        <input type="checkbox" id="agree" name="agree">
                         <label for="agree">개인정보 수집 및 마케팅 정보 수신에 동의합니다 (필수)</label>
                     </div>
 
@@ -345,6 +345,102 @@
             <p>이미 사전 예약 완료된 번호입니다.</p>
             <div class="modal-buttons">
                 <button class="modal-button primary" onclick="closeDuplicateModal()">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Consent Modal -->
+    <div id="consentModal" class="modal">
+        <div class="modal-content consent-modal-content">
+            <button class="modal-close" onclick="closeConsentModal()">×</button>
+            <h3>약관 동의</h3>
+
+            <div class="consent-container">
+                <!-- 전체 동의 -->
+                <div class="consent-item consent-all">
+                    <label class="consent-checkbox-wrapper">
+                        <input type="checkbox" id="consentAll" class="consent-checkbox">
+                        <span class="consent-title">전체 동의하기</span>
+                    </label>
+                    <p class="consent-description">
+                        전체 동의는 큐브 사전 예약 개인 정보 수집 및 이용 동의와 선택 목적에 대한 동의를 포함하고 있으며, 선택 목적에 대한 동의를 거부해도 서비스 이용이 가능합니다.
+                    </p>
+                </div>
+
+                <div class="consent-divider"></div>
+
+                <!-- 개인정보 수집 및 이용 동의 (필수) -->
+                <div class="consent-item">
+                    <div class="consent-label">
+                        <label class="consent-checkbox-wrapper">
+                            <input type="checkbox" id="consentRequired" class="consent-checkbox consent-required">
+                            <span class="consent-title"><span class="consent-badge required">필수</span> 개인정보 수집 및 이용 동의</span>
+                        </label>
+                        <button type="button" class="consent-toggle" onclick="toggleConsentDetail('required')">보기</button>
+                    </div>
+                    <div id="consentDetailRequired" class="consent-detail">
+                        <div class="consent-section">
+                            <h4>수집하는 개인정보 항목</h4>
+                            <table class="consent-table">
+                                <tr>
+                                    <th>수집 항목</th>
+                                    <th>이용 목적</th>
+                                    <th>보유 기간</th>
+                                </tr>
+                                <tr>
+                                    <td>- 이름<br>- 휴대폰 번호<br>- 자녀 연령</td>
+                                    <td>- 본인확인<br>- 서비스 안내<br>- 혜택 제공<br>- 고객 응대<br>- 통계 분석</td>
+                                    <td>- 이벤트 종료 후 90일<br>(가입 시 회원 탈퇴까지 보유)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="consent-section">
+                            <h4>제3자 제공 및 처리 위탁</h4>
+                            <p>- 네이버(포인트 지급): 이름, 휴대폰 번호</p>
+                            <p>- 다우기술(메시지 발송), AWS(데이터 관리)</p>
+                        </div>
+                        <div class="consent-section">
+                            <h4>필수 안내 사항</h4>
+                            <p>- 귀하는 위 개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있습니다. 다만, 동의를 거부하실 경우 사전예약 신청 및 관련 이벤트 참여가 제한됩니다.</p>
+                        </div>
+                        <div class="consent-section">
+                            <h4>개인정보 보호책임자</h4>
+                            <p>- 고객 지원팀: 1533-1779</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 마케팅 정보 수신 동의 (선택) -->
+                <div class="consent-item">
+                    <div class="consent-label">
+                        <label class="consent-checkbox-wrapper">
+                            <input type="checkbox" id="consentOptional" class="consent-checkbox consent-optional">
+                            <span class="consent-title"><span class="consent-badge optional">선택</span> 마케팅 정보 수신 동의</span>
+                        </label>
+                        <button type="button" class="consent-toggle" onclick="toggleConsentDetail('optional')">보기</button>
+                    </div>
+                    <div id="consentDetailOptional" class="consent-detail">
+                        <div class="consent-section">
+                            <h4>수신 방법</h4>
+                            <p>SMS, 알림톡, 이메일, 앱 푸시, 해피콜</p>
+                        </div>
+                        <div class="consent-section">
+                            <h4>수신 내용</h4>
+                            <p>프로모션, 이벤트, 혜택 안내, 콘텐츠 추천</p>
+                        </div>
+                        <div class="consent-section">
+                            <h4>필수 안내 사항</h4>
+                            <p>- 귀하는 마케팅 정보 수신 동의를 거부할 권리가 있습니다.</p>
+                            <p>- 동의 거부 시에도 서비스 이용에는 제한이 없습니다.</p>
+                            <p>- 동의 후에도 언제든지 수신을 거부하실 수 있습니다. (고객센터: 1533-1776)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-buttons">
+                <button type="button" class="modal-button primary" onclick="submitConsent()">동의하고 신청 완료하기</button>
+                <button type="button" class="modal-button secondary" onclick="closeConsentModal()">취소</button>
             </div>
         </div>
     </div>
