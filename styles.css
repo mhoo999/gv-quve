@@ -22,7 +22,7 @@ body {
 
 /* Hero Section */
 .hero {
-    background-image: url('images/hero_bg.png');
+    background-image: url('images/hero_bg.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -50,6 +50,56 @@ body {
     z-index: 1;
     max-width: 800px;
     margin: 0 auto;
+}
+
+.hero-brain-comparison {
+    position: absolute;
+    bottom: 220px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 0 20px;
+    z-index: 2;
+}
+
+.brain-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.brain-image-wrapper {
+    display: inline-block;
+    line-height: 0;
+    width: fit-content;
+    height: fit-content;
+}
+
+.brain-image {
+    width: auto;
+    height: auto;
+    display: block;
+    transform: scale(0.3);
+    transform-origin: center top;
+    border-radius: 100px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.brain-label {
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0;
 }
 
 .hero-bottom-overlay {
@@ -495,63 +545,12 @@ body {
     background: #f7f8fa;
 }
 
-.bg-image {
-    position: relative;
-    background-image: url('images/section-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #f7f8fa; /* fallback */
-}
 
-.bg-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 0;
-}
 
-.bg-image .container {
-    position: relative;
-    z-index: 1;
-}
-
-.bg-image .section-title {
-    color: #ffffff;
-}
-
-.bg-image-white {
-    position: relative;
-    background-image: url('images/section-bg-white.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #ffffff; /* fallback */
-}
-
-.bg-image-white::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.7);
-    z-index: 0;
-}
-
-.bg-image-white .container {
-    position: relative;
-    z-index: 1;
-}
 
 .bg-image-conversion {
     position: relative;
-    background-image: url('images/conversion-bg.png');
+    background-image: url('images/conversion-bg.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1255,12 +1254,14 @@ body {
 
 .sliding-testimonials {
     overflow: hidden;
-    width: 100%;
-    max-width: 100%;
+    position: relative;
+    left: -24px;
+    right: -24px;
+    width: calc(100% + 48px);
     padding: 40px 0;
     background: rgba(255,255,255,0);
-    margin: 0 0 30px 0;
-    position: relative;
+    margin-top: 0;
+    margin-bottom: 30px;
     z-index: 2;
 }
 
@@ -1292,19 +1293,14 @@ body {
 
 .testimonial-slider {
     display: flex;
-    animation: slide 30s linear infinite;
     gap: 24px;
-    padding: 0 24px;
+    padding: 0;
+    width: 100%;
     will-change: transform;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-}
-
-/* 호버 시 애니메이션 일시정지 */
-.testimonial-slider:hover {
-    animation-play-state: paused;
 }
 
 @keyframes slide {
@@ -2050,7 +2046,7 @@ body {
     .hero {
         padding: 40px 24px 0px;
         background-color: #4D1696;
-        background-image: url('images/hero_bg_mo.png');
+        background-image: url('images/hero_bg_mo.webp');
         background-size: 100% auto;
         background-position: center bottom;
         background-repeat: no-repeat;
@@ -2074,6 +2070,22 @@ body {
     .hero .launch-date {
         font-size: 15px;
         margin-bottom: 32px;
+    }
+
+    .hero-brain-comparison {
+        bottom: 220px;
+        gap: 20px;
+        padding: 0 20px;
+    }
+
+    .brain-image {
+        max-width: 150px;
+        border-radius: 100px;
+    }
+
+    .brain-label {
+        font-size: 14px;
+        line-height: 18px;
     }
 
     .video-placeholder {
@@ -2145,9 +2157,6 @@ body {
         padding: 80px 24px;
     }
 
-    .bg-gray.bg-image .container {
-        padding: 0;
-    }
 
     .section-title {
         font-size: 28px;
@@ -2276,6 +2285,11 @@ body {
     }
 
     .sliding-testimonials {
+        position: relative;
+        left: -24px;
+        right: -24px;
+        width: calc(100% + 48px);
+        margin-top: 0;
         margin-bottom: 30px;
         padding: 32px 0;
     }
@@ -2293,7 +2307,8 @@ body {
     }
 
     .testimonial-slider {
-        padding: 0 24px;
+        padding: 0;
+        width: 100%;
         gap: 20px;
     }
 
@@ -2477,7 +2492,7 @@ body {
     .hero {
         padding: 40px 20px 100px;
         background-color: #4D1696;
-        background-image: url('images/hero_bg_mo.png');
+        background-image: url('images/hero_bg_mo.webp');
         background-size: 100% auto;
         background-position: center bottom;
         background-repeat: no-repeat;
@@ -2495,6 +2510,23 @@ body {
 
     .hero .subtitle {
         font-size: 17px;
+    }
+
+    .hero-brain-comparison {
+        bottom: 220px;
+        gap: 16px;
+        padding: 0 20px;
+        flex-direction: column;
+    }
+
+    .brain-image {
+        max-width: 120px;
+        border-radius: 100px;
+    }
+
+    .brain-label {
+        font-size: 13px;
+        line-height: 16px;
     }
 
     .hero .launch-date {
@@ -2574,9 +2606,6 @@ body {
         padding: 64px 20px;
     }
 
-    .bg-gray.bg-image .container {
-        padding: 0;
-    }
 
     .section-title {
         font-size: 24px;
@@ -2745,12 +2774,21 @@ body {
     }
 
     .sliding-testimonials {
+        position: relative;
+        left: -20px;
+        right: -20px;
+        width: calc(100% + 40px);
+        margin-top: 0;
         margin-bottom: 30px;
     }
 
-    .testimonial-subtitle,
-    .testimonial-slider {
+    .testimonial-subtitle {
         padding: 0 20px;
+    }
+    
+    .testimonial-slider {
+        padding: 0;
+        width: 100%;
     }
 
     .form-container {
@@ -2923,6 +2961,10 @@ body {
 
     /* Sliding Testimonials */
     .sliding-testimonials {
+        position: relative;
+        left: -20px;
+        right: -20px;
+        width: calc(100% + 40px);
         padding: 32px 0;
     }
 

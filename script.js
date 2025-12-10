@@ -100,62 +100,108 @@ const FAQ_DATA = [
 const TESTIMONIAL_DATA = [
     {
         id: 1,
-        title: "유튜브만 찾던 아이가 먼저 '큐브 하자'고 졸라요!",
-        image: "images/testimonial-1.png",
-        content: "일방적인 영상만 보던 아이가, 캐릭터가 자기 말에 대답해주고 칭찬해주니 신나서 30분 내내 조잘거리네요.",
-        author: "- 5세 자녀",
+        title: "멍하게 보던 영상에서 생각하며 대답하는 경험으로!",
+        image: "images/reviews/review_1.jpg",
+        content: "일반 영상은 멍하니 보기만 했는데, 큐브는 질문에 답하며 스스로 생각하는 시간이 생겼어요. 반복 시청할수록 답변이 정확해지고 언어 표현도 좋아졌습니다.",
+        author: "이** / 5세",
         pageUrl: null // null이면 기본 후기 페이지로 이동, 특정 URL이면 해당 페이지로 이동
     },
     {
         id: 2,
-        title: "유튜브만 찾던 아이가 먼저 '큐브 하자'고 졸라요!",
-        image: "images/testimonial-2.png",
-        content: "일방적인 영상만 보던 아이가, 캐릭터가 자기 말에 대답해주고 칭찬해주니 신나서 30분 내내 조잘거리네요.",
-        author: "- 5세 자녀",
+        title: "아이 말에 반응해주는 AI 이비, 실제 대화같았어요!",
+        image: "images/reviews/review_2.jpg",
+        content: "이비가 아이 말을 듣고 반응해주자 표정부터 달라졌어요. 단순 시청이 아니라 상호작용하며 질문에 대한 생각을 하는 과정이 집중도도 높이고 긍정적 자극을 주었다고 생각해요.",
+        author: "이** / 5세",
         pageUrl: null
     },
     {
         id: 3,
-        title: "유튜브만 찾던 아이가 먼저 '큐브 하자'고 졸라요!",
-        image: "images/testimonial-3.png",
-        content: "일방적인 영상만 보던 아이가, 캐릭터가 자기 말에 대답해주고 칭찬해주니 신나서 30분 내내 조잘거리네요.",
-        author: "- 5세 자녀",
+        title: "책 읽기에 흥미 없던 아이가 재미를 느끼기 시작했어요!",
+        image: "images/reviews/review_3.jpg",
+        content: "평소 책 읽는데 큰 관심이 없었는데, 큐브를 통해 책 읽기 요소에 재미를 느끼며 긍정적이 반응을 보였어요. 상호작용 덕분에 내용을 생각하고 표현하려는 모습이 생겼습니다.",
+        author: "박** / 7세",
         pageUrl: null
     },
     {
         id: 4,
-        title: "유튜브만 찾던 아이가 먼저 '큐브 하자'고 졸라요!",
-        image: "images/testimonial-4.png",
-        content: "일방적인 영상만 보던 아이가, 캐릭터가 자기 말에 대답해주고 칭찬해주니 신나서 30분 내내 조잘거리네요.",
-        author: "- 5세 자녀",
+        title: "가상의 책 읽기 선생님처럼, 거부감 없이 빠져들어요.",
+        image: "images/reviews/review_4.jpg",
+        content: "큐브는 아이 이름을 불러주며 마치 가상의 책 읽기 선생님과 대화하는 느낌이었어요. 거부감 없이 스며들 듯 집중했고, 아이가 책 읽기 자체를 즐겁게 받아들이는 변화를 직접 볼 수 있었습니다.",
+        author: "김** / 5세",
         pageUrl: null
     },
     {
         id: 5,
-        title: "유튜브만 찾던 아이가 먼저 '큐브 하자'고 졸라요!",
-        image: "images/testimonial-5.png",
-        content: "일방적인 영상만 보던 아이가, 캐릭터가 자기 말에 대답해주고 칭찬해주니 신나서 30분 내내 조잘거리네요.",
-        author: "- 5세 자녀",
+        title: "자극적 영상 대신 교육적이고 집중도 높은 경험",
+        image: "images/reviews/review_5.jpg",
+        content: "추천 영상이 계속 이어지는 유**와 달리 큐브는 책 기반이라 안심됐어요. 아이가 끝까지 몰입하며 웃고 반응하는 모습이 새로웠습니다.",
+        author: "채** / 7세",
         pageUrl: null
     },
     {
         id: 6,
-        title: "유튜브만 찾던 아이가 먼저 '큐브 하자'고 졸라요!",
-        image: "images/testimonial-6.png",
-        content: "일방적인 영상만 보던 아이가, 캐릭터가 자기 말에 대답해주고 칭찬해주니 신나서 30분 내내 조잘거리네요.",
-        author: "- 5세 자녀",
+        title: "일방적 시청이 아닌, 생각을 이끌어주는 상호작용",
+        image: "images/reviews/review_6.jpg",
+        content: "이비가 아이의 말을 이해하고 반응해주는 점이 가장 좋았어요. 발음이 부정확해도 다시 말하려는 의지가 생겨 언어 표현에 도움이 되었어요.",
+        author: "조** / 5세",
+        pageUrl: null
+    },
+    {
+        id: 7,
+        title: "다시 책에 관심을 갖게 된 계기",
+        image: "images/reviews/review_7.jpg",
+        content: "독서 흥미가 떨어졌었는데 큐브를 본 뒤 다시 책을 찾아 읽어달라고 했어요. 반복 시청하며 생각이 확장되는 느낌을 받았습니다.",
+        author: "정** / 5세",
+        pageUrl: null
+    },
+    {
+        id: 8,
+        title: "필수가 되 버린 태블릿 시대,피할 수 없다면 검증된 콘텐츠로!",
+        image: "images/reviews/review_8.jpg",
+        content: "가정에서 필수가 되어버린 태블릿 시대, 무엇을 보여 줄지가 중요해 졌어요. 큐브는 단순 영상이 아니라 질문하고 대답하며 상호작용하는 경험을 주니 아이의 미디어 시간이 훨씬 유익해 졌어요!",
+        author: "이** / 6세",
+        pageUrl: null
+    },
+    {
+        id: 9,
+        title: "책 읽어줄 시간이 부족한 워킹맘에게, 가장 현실적인 대안이었어요.",
+        image: "images/reviews/review_9.jpg",
+        content: "워킹맘에게 책 읽어주는 시간을 확보하기란 정말 쉽지 않은데.. 큐브는 그 시간을 자연스럽게 대신해줬어요. 아이의 이름을 불러주며 대화하니 거부감 없이 집중하는 모습이 좋았습니다.",
+        author: "전** / 3세",
+        pageUrl: null
+    },
+    {
+        id: 10,
+        title: "단순 시청에서 벗어나 내용 이해까지 이어져요.",
+        image: "images/reviews/review_10.jpg",
+        content: "상호작용하며 책 내용을 다시 생각하게 되고, 단순히 그림만 보는 게 아니라 상황을 설명하려는 변화가 보였어요. 집중해서 듣고, 내용을 제대로 이해하려는 태도가 뚜렷해 졌어요.",
+        author: "김** / 5세",
+        pageUrl: null
+    },
+    {
+        id: 11,
+        title: "언어가 폭팔적으로 증가하는 3세 유아에게 강력 추천",
+        image: "images/reviews/review_11.png",
+        content: "무분별한 영상 시청과 달리, 큐브는 아이가 직접 말하고 반응하는 과정이 있어 언어발달과 사고력에 긍정적인 영향을 주었어요. 특이 언어가 급격히 자라는 3세 시기에 잘 맞는 콘텐츠라고 생각합니다.",
+        author: "흥** / 3세",
+        pageUrl: null
+    },
+    {
+        id: 12,
+        title: "능동적으로 참여하며 집중력이 높아졌어요.",
+        image: "images/reviews/review_12.jpeg",
+        content: "아이가 직접 말하고 생각하는 과정이 포함되어 있어 언어력 향상에 큰 도움이 되었어요. 기존 한글 학습과 함께 활용하니 효과가 더 잘 드러났고, 이야기 속에서 상상하고 사고하는 능력도 확장 된 느낌입니다.",
+        author: "흥** / 6세",
+        pageUrl: null
+    },
+    {
+        id: 13,
+        title: "질문이 있으니 책 이해와 생각의 폭이 확 달라졌어요.",
+        image: "images/reviews/review_13.jpg",
+        content: "상호작용 덕분에 아이가 단순히 듣는 데서 끝나지 않고, 내용을 기억하고 스스로 말하려는 변화가 생겼어요. 반복 시청한 책은 응용까지 할 만큼 이해도가 높아져 놀랐어요.",
+        author: "김** / 6세",
         pageUrl: null
     }
-    // 새로운 후기를 추가하려면 위 형식으로 객체를 추가하세요
-    // 예:
-    // {
-    //     id: 7,
-    //     title: "새로운 후기 제목",
-    //     image: "images/testimonial-7.png",
-    //     content: "후기 내용",
-    //     author: "- 4세 자녀",
-    //     pageUrl: "https://example.com/testimonial/7" // 특정 페이지가 있으면 URL 입력
-    // }
 ];
 
 // 출시 날짜 설정 (2025년 12월 18일 00:00:00)
@@ -857,6 +903,7 @@ function initTestimonialSlider() {
 
     // 드래그 및 자동 슬라이드 기능
     let isDragging = false;
+    let isHovering = false;
     let startX = 0;
     let currentTranslate = 0;
     let animationId = null;
@@ -867,7 +914,7 @@ function initTestimonialSlider() {
 
     // 자동 슬라이드 애니메이션 (requestAnimationFrame 사용)
     function autoSlide() {
-        if (isDragging) return;
+        if (isDragging || isHovering) return;
 
         // 속도 절반으로 감소 (0.75px씩 이동)
         currentTranslate -= 0.25;
@@ -924,11 +971,6 @@ function initTestimonialSlider() {
         startDrag(e.clientX);
     });
 
-    slider.addEventListener('mouseleave', () => {
-        if (isDragging) {
-            endDrag();
-        }
-    });
 
     slider.addEventListener('mouseup', () => {
         if (isDragging) {
@@ -938,6 +980,25 @@ function initTestimonialSlider() {
 
     slider.addEventListener('mousemove', (e) => {
         drag(e.clientX);
+    });
+
+    // 호버 시 애니메이션 일시정지
+    slider.addEventListener('mouseenter', () => {
+        isHovering = true;
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isHovering = false;
+        if (!isDragging && !animationId) {
+            animationId = requestAnimationFrame(autoSlide);
+        }
+        if (isDragging) {
+            endDrag();
+        }
     });
 
     // 터치 드래그 (모바일)
