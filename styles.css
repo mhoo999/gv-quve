@@ -104,11 +104,12 @@ body {
 }
 
 .brain-video {
-    width: auto;
-    height: 96px;
+    width: 238px;
+    height: 134px;
     border-radius: 20px;
     display: block;
     object-fit: cover;
+    border: 2px solid #000000;
 }
 
 .brain-image-wrapper {
