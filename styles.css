@@ -933,7 +933,6 @@ body {
     font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-weight: 700;
     font-style: normal;
-    font-size: 1.5em;
     line-height: 1.25em;
     letter-spacing: -0.02em;
     text-align: center;
@@ -2033,6 +2032,10 @@ body {
         border-radius: 1.25em;
     }
 
+    .conversion-subtitle {
+        font-size: 1.5em;
+    }
+
     .benefit-hero-value {
         font-size: 56px;
     }
@@ -2307,6 +2310,10 @@ body {
         padding: 0.5em 1.5em;
         border-radius: 1.25em;
         margin-bottom: 1.43em;
+    }
+
+    .conversion-subtitle {
+        font-size: 1.5em;
     }
 
     .benefit-hero {
