@@ -1086,8 +1086,9 @@ body {
     object-fit: contain;
 }
 
-.benefits-grid .benefit-card.gift-card:first-of-type .benefit-image {
+.benefits-grid .benefit-card.gift-card:nth-child(3) .benefit-image-wrapper .benefit-image {
     margin: 8px auto;
+    display: block;
 }
 
 .benefit-card.gift-card .benefit-badge {
