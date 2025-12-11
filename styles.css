@@ -17,7 +17,6 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 12px;
 }
 
 /* Hero Section */
@@ -373,7 +372,7 @@ body {
 
 /* Experience Section */
 .experience-section {
-    padding: 40px 24px;
+    padding: 40px 16px;
     background: #ffffff;
     text-align: center;
 }
@@ -2093,7 +2092,7 @@ body {
 @media (max-width: 768px) {
     /* Experience Section */
     .experience-section {
-        padding: 50px 24px;
+        padding: 50px 16px;
     }
 
     .experience-title {
@@ -2611,7 +2610,7 @@ body {
 
     /* Experience Section */
     .experience-section {
-        padding: 35px 20px;
+        padding: 35px 16px;
     }
 
     .experience-title {
@@ -2695,7 +2694,7 @@ body {
     }
 
     .brain-label {
-        font-size: 13px;
+        font-size: 24px;
         line-height: 16px;
     }
 
