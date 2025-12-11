@@ -1087,15 +1087,15 @@ body {
 }
 
 .benefit-card.gift-card .benefit-badge {
-    margin-bottom: 8px;
+    margin-bottom: 0px;
 }
 
 .benefit-card.gift-card .benefit-image-wrapper {
-    margin: 12px auto;
+    margin: 0px auto;
 }
 
 .benefit-card.gift-card .benefit-detail {
-    margin-top: 8px;
+    margin-top: 0px;
 }
 
 .benefit-circle-badge {
