@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팝업 배너</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-overlay.active {
+            display: flex;
+        }
+
+        .popup-container {
+            position: relative;
+            width: 1000px;
+            height: 600px;
+        }
+
+        .popup-image {
+            width: 1000px;
+            height: 600px;
+            object-fit: contain;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 40px;
+            height: 40px;
+            background-color: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #333;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-close:hover {
+            background-color: #f5f5f5;
+            transform: scale(1.1);
+        }
+
+        .popup-close::before {
+            content: '×';
+            line-height: 1;
+        }
+
+        /* 모바일 스타일 */
+        @media (max-width: 768px) {
+            .popup-container {
+                width: 327px;
+                height: 510px;
+            }
+
+            .popup-image {
+                width: 327px;
+                height: 510px;
+            }
+
+            .popup-close {
+                width: 35px;
+                height: 35px;
+                top: -12px;
+                right: -12px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 팝업 배너 -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-container">
+            <button class="popup-close" id="popupClose"></button>
+            <img src="banner_img/banner_web.webp" alt="배너" class="popup-image" id="popupImage">
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // 팝업 배너 링크 설정
+        // ============================================
+        // 아래 링크 URL을 변경하면 이미지 클릭 시 이동할 주소를 설정할 수 있습니다.
+        // 빈 문자열("")로 설정하면 링크 이동 기능이 비활성화됩니다.
+        const POPUP_LINK_URL = ""; // 예: "https://example.com" 또는 "/page.html"
+        // ============================================
+
+        // 웹/모바일 이미지 자동 전환
+        function setPopupImage() {
+            const popupImage = document.getElementById('popupImage');
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                popupImage.src = 'banner_img/banner_mo.webp';
+            } else {
+                popupImage.src = 'banner_img/banner_web.webp';
+            }
+        }
+
+        // 팝업 표시
+        function showPopup() {
+            const overlay = document.getElementById('popupOverlay');
+            overlay.classList.add('active');
+            setPopupImage();
+        }
+
+        // 팝업 닫기
+        function closePopup() {
+            const overlay = document.getElementById('popupOverlay');
+            overlay.classList.remove('active');
+        }
+
+        // 이미지 클릭 시 링크 이동
+        function handleImageClick() {
+            if (POPUP_LINK_URL && POPUP_LINK_URL.trim() !== "") {
+                window.location.href = POPUP_LINK_URL;
+            }
+        }
+
+        // 이벤트 리스너
+        document.getElementById('popupClose').addEventListener('click', function(e) {
+            e.stopPropagation(); // 이벤트 전파 방지
+            closePopup();
+        });
+        
+        document.getElementById('popupImage').addEventListener('click', handleImageClick);
+        
+        document.getElementById('popupOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
+        });
+
+        // 윈도우 리사이즈 시 이미지 재설정
+        window.addEventListener('resize', setPopupImage);
+
+        // 페이지 로드 시 팝업 표시
+        window.addEventListener('load', function() {
+            setTimeout(showPopup, 500); // 0.5초 후 표시
+        });
+    </script>
+</body>
+</html>
+
