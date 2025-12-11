@@ -1074,17 +1074,28 @@ body {
     max-width: 300px;
     height: auto;
     display: block;
-    margin: 20px auto;
+    margin: 0px auto;
 }
 
 .benefit-card.highlight .benefit-image {
-    margin: 20px auto;
+    margin: 0px auto;
     display: block;
 }
 
 .benefit-card.gift-card .benefit-image {
-    min-height: 200px;
     object-fit: contain;
+}
+
+.benefit-card.gift-card .benefit-badge {
+    margin-bottom: 8px;
+}
+
+.benefit-card.gift-card .benefit-image-wrapper {
+    margin: 12px auto;
+}
+
+.benefit-card.gift-card .benefit-detail {
+    margin-top: 8px;
 }
 
 .benefit-circle-badge {
