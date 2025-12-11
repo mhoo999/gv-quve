@@ -1084,6 +1084,7 @@ body {
 
 .benefit-card.gift-card .benefit-image {
     object-fit: contain;
+    margin: 8px auto;
 }
 
 .benefit-card.gift-card .benefit-badge {
@@ -1091,7 +1092,7 @@ body {
 }
 
 .benefit-card.gift-card .benefit-image-wrapper {
-    margin: 8px auto;
+    margin: 0px auto;
 }
 
 .benefit-card.gift-card .benefit-detail {
