@@ -69,6 +69,10 @@ body {
     .hero-brain-comparison {
         padding: 0 calc(50px + (100vw - 966px) * 0.2);
     }
+
+    .conversion-subtitle {
+        font-size: 40px;
+    }
 }
 
 @media (min-width: 1760px) {
@@ -568,7 +572,7 @@ body {
 
 /* Section Styles */
 .section {
-    padding: 100px 24px;
+    padding: 80px 24px;
 }
 
 .section-title {
@@ -753,7 +757,6 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
-    margin-bottom: 32px;
 }
 
 .experiment-item {
