@@ -579,7 +579,7 @@ body {
     text-align: center;
     font-size: 2.25em;
     font-weight: 700;
-    margin-bottom: 1.78em;
+    margin-bottom: 20px;
     color: #191f28;
     position: relative;
     letter-spacing: -0.02em;
@@ -1195,6 +1195,18 @@ body {
     max-width: 800px;
     margin: 0 auto;
     margin-bottom: 48px;
+}
+
+.notice-title {
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #545454;
+    margin-bottom: 20px;
 }
 
 .notice-content {
@@ -2258,7 +2270,7 @@ body {
 
     .section-title {
         font-size: 1.75em;
-        margin-bottom: 20px;
+        margin-bottom: 1.43em;
         line-height: 1.4;
     }
 
