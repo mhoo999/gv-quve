@@ -1205,7 +1205,6 @@ body {
 .faq-list {
     max-width: 800px;
     margin: 0 auto;
-    margin-bottom: 48px;
 }
 
 .notice-section {
@@ -2098,6 +2097,15 @@ body {
     .experiment-grid {
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     }
+
+    /* Brain video 숨기기 */
+    .brain-video-wrapper {
+        display: none;
+    }
+
+    .brain-video {
+        display: none;
+    }
 }
 
 /* Mobile (768px 이하) */
@@ -2177,14 +2185,13 @@ body {
         bottom: 160px;
         padding: 0 20px;
         justify-content: space-between;
-        width: calc(100% / 0.64);
-        left: 50%;
-        transform: translateX(-50%) scale(0.64);
-        transform-origin: center bottom;
+        width: 100%;
+        left: 0;
+        transform: none;
     }
 
     .brain-item {
-        width: 200px;
+        width: 90px;
     }
 
     .brain-right-group {
@@ -2201,15 +2208,17 @@ body {
 
     .brain-image-wrapper {
         width: 100%;
-        max-width: 200px;
+        max-width: 90px;
     }
 
     .brain-image {
+        width: 90px;
+        height: 72px;
         border-radius: 100px;
     }
 
     .brain-label {
-        font-size: 14px;
+        font-size: 12px;
         line-height: 18px;
     }
 
@@ -2438,7 +2447,6 @@ body {
         width: calc(100% + 48px);
         margin-top: 0;
         margin-bottom: 30px;
-        padding: 32px 0;
     }
 
     .testimonial-main-title {
@@ -2674,14 +2682,13 @@ body {
         padding: 0 20px;
         justify-content: space-between;
         flex-direction: row;
-        width: calc(100% / 0.64);
-        left: 50%;
-        transform: translateX(-50%) scale(0.64);
-        transform-origin: center bottom;
+        width: 100%;
+        left: 0;
+        transform: none;
     }
 
     .brain-item {
-        width: 200px;
+        width: 90px;
     }
 
     .brain-right-group {
@@ -2698,15 +2705,17 @@ body {
 
     .brain-image-wrapper {
         width: 100%;
-        max-width: 200px;
+        max-width: 90px;
     }
 
     .brain-image {
+        width: 90px;
+        height: 72px;
         border-radius: 100px;
     }
 
     .brain-label {
-        font-size: 24px;
+        font-size: 12px;
         line-height: 16px;
     }
 
@@ -3164,7 +3173,6 @@ body {
         left: -20px;
         right: -20px;
         width: calc(100% + 40px);
-        padding: 32px 0;
     }
 
     .testimonial-main-title {
@@ -3197,12 +3205,10 @@ body {
 
     .testimonial-content {
         font-size: 14px;
-        margin-bottom: 16px;
     }
 
     .testimonial-author {
         font-size: 13px;
-        margin-bottom: 12px;
     }
 
     /* Research Link */
