@@ -1103,7 +1103,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Experience 버튼 이벤트 초기화
     initExperienceButton();
+
+    // 모바일에서 hero 높이 조정
+    adjustHeroHeight();
+    window.addEventListener('resize', adjustHeroHeight);
 });
+
+// 모바일에서 hero 높이 조정 (보라색 200px + 배경 이미지 높이)
+function adjustHeroHeight() {
+    // 모바일에서만 작동 (768px 이하)
+    if (window.innerWidth > 768) {
+        return;
+    }
+
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    const bgImage = new Image();
+    bgImage.src = 'images/hero_bg_mo.webp';
+    
+    bgImage.onload = function() {
+        const imageHeight = (bgImage.height / bgImage.width) * window.innerWidth;
+        const purpleHeight = 200;
+        const totalHeight = purpleHeight + imageHeight;
+        
+        hero.style.minHeight = totalHeight + 'px';
+    };
+    
+    bgImage.onerror = function() {
+        console.warn('Hero 배경 이미지를 로드할 수 없습니다.');
+    };
+}
 
 // Experience 버튼 초기화
 function initExperienceButton() {
