@@ -2154,11 +2154,23 @@ body {
     /* Hero Section */
     .hero {
         padding: 40px 24px 0px;
-        background-color: #4D1696;
+        position: relative;
+        background-color: #ffffff;
         background-image: url('images/hero_bg_mo.webp');
         background-size: 100% auto;
-        background-position: center bottom;
+        background-position: top 200px center;
         background-repeat: no-repeat;
+    }
+    
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 200px;
+        background-color: #4D1696;
+        z-index: 0;
     }
 
     .hero-logo {
@@ -2655,12 +2667,24 @@ body {
 
     /* Hero Section - Extra Small Screens */
     .hero {
-        padding: 40px 20px 100px;
-        background-color: #4D1696;
+        padding: 40px 20px 0px;
+        position: relative;
+        background-color: #ffffff;
         background-image: url('images/hero_bg_mo.webp');
         background-size: 100% auto;
-        background-position: center bottom;
+        background-position: top 200px center;
         background-repeat: no-repeat;
+    }
+    
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 200px;
+        background-color: #4D1696;
+        z-index: 0;
     }
 
     .hero-logo {
